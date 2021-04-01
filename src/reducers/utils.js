@@ -1,5 +1,8 @@
 const checkItemExist = (list, productId) => {
-  const res = list.filter(({ id }) => id === productId);
+  const res = list.filter(
+    ({ id, status }) =>
+      id === productId && (status ? status !== "deleted" : true)
+  );
   return res.length > 0 ? true : false;
 };
 
@@ -15,6 +18,12 @@ const removeItem = (list, productId) => {
   return list.filter(({ id }) => id !== productId);
 };
 
+const removeItemFromCartList = (list, productId) => {
+  return list.map((product) =>
+    product.id === productId ? { ...product, status: "deleted" } : product
+  );
+};
+
 const updateQuantity = (list, productId, incOrDec) => {
   return list.map((product) => {
     const { id, cartQuantity } = product;
@@ -27,4 +36,15 @@ const updateQuantity = (list, productId, incOrDec) => {
   }, []);
 };
 
-export { checkItemExist, appendItem, updateQuantity, removeItem };
+const getFilteredList = (list) => {
+  return list.filter(({ status }) => status !== "deleted");
+};
+
+export {
+  checkItemExist,
+  appendItem,
+  updateQuantity,
+  removeItem,
+  removeItemFromCartList,
+  getFilteredList,
+};

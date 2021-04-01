@@ -4,18 +4,18 @@ import { database } from "../database";
 export default function setupMockServer() {
   createServer({
     serializers: {
-      application: RestSerializer
+      application: RestSerializer,
     },
 
     models: {
       wish: Model,
       cart: Model,
-      product: Model
+      product: Model,
     },
 
     routes() {
       this.namespace = "api";
-      this.timing = 2000;
+      this.timing = 300;
       this.resource("wishes");
       this.resource("products");
       this.resource("carts");
@@ -27,6 +27,6 @@ export default function setupMockServer() {
       [database[0]].forEach((product) =>
         server.create("cart", { ...product, cartQuantity: 1 })
       );
-    }
+    },
   });
 }

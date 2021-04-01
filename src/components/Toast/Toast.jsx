@@ -5,22 +5,22 @@ import "./Toast.css";
 export const handleToast = (dispatch, text) => {
   dispatch({
     type: Actions.OPEN_OR_CLOSE_TOAST,
-    payload: { show: true, text }
+    payload: { show: true, text },
   });
-  // setTimeout(() => closeToast(dispatch), 3000);
+  setTimeout(() => closeToast(dispatch), 1000);
 };
 
 const closeToast = (dispatch) => {
   dispatch({
     type: Actions.OPEN_OR_CLOSE_TOAST,
-    payload: { show: false, text: "" }
+    payload: { show: false, text: "" },
   });
 };
 
 const Toast = () => {
   const {
     state: { showToast, toastMessage },
-    dispatch
+    dispatch,
   } = useProduct();
 
   return (

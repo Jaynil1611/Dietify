@@ -1,31 +1,14 @@
 import "./ProductListing.css";
-import { Actions } from "../../reducers";
 import { useProduct } from "../../contexts";
 import { checkItemExist } from "../../reducers";
 import { Link } from "react-router-dom";
-import { handleToast } from "../Toast/Toast";
+import { addOrRemoveFromWish, addItemToCart } from "./ServerUpdate";
 
 const ProductListing = ({ productList }) => {
   const {
     state: { wishList, cartList },
-    dispatch
+    dispatch,
   } = useProduct();
-
-  const addItemToCart = (product) => {
-    handleToast(dispatch, "Cart Updated");
-    dispatch({
-      type: Actions.ADD_ITEM_TO_CART,
-      payload: product
-    });
-  };
-
-  const addOrRemoveWishList = (product) => {
-    handleToast(dispatch, "Wishlist Updated");
-    dispatch({
-      type: Actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST,
-      payload: product
-    });
-  };
 
   return (
     <div className="product-showcase">
@@ -38,7 +21,7 @@ const ProductListing = ({ productList }) => {
                 className={`${
                   checkItemExist(wishList, id) ? "fas" : "far"
                 } fa-heart fa-lg `}
-                onClick={() => addOrRemoveWishList(product)}
+                onClick={() => addOrRemoveFromWish(dispatch, product, wishList)}
               ></i>
             </div>
             <img className="img--responsive" src={image} alt="" />
@@ -57,7 +40,7 @@ const ProductListing = ({ productList }) => {
                 </button>
               ) : (
                 <button
-                  onClick={() => addItemToCart(product)}
+                  onClick={() => addItemToCart(dispatch, product)}
                   className="button button--primary button--sm text-white subtitle--sm"
                 >
                   Add to Cart

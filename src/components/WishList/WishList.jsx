@@ -1,40 +1,32 @@
 import React from "react";
-import { useProduct } from "../../contexts";
-import { Actions } from "../../reducers";
-import { handleToast } from "../Toast/Toast";
 import "./WishList.css";
+import { useProduct } from "../../contexts";
+import { addItemToCart, addOrRemoveFromWish } from "../index";
+import { getFilteredList } from "../../reducers";
 
 function WishList() {
   const {
     state: { wishList },
-    dispatch
+    dispatch,
   } = useProduct();
 
-  const addItemToCart = (product) => {
-    handleToast(dispatch, "Wishlist & Cart Updated");
+  const addItemToCartList = (product) => {
     removeFromWishList(product);
-    dispatch({
-      type: Actions.ADD_ITEM_TO_CART,
-      payload: product
-    });
+    addItemToCart(dispatch, product);
   };
 
   const removeFromWishList = (product) => {
-    handleToast(dispatch, "Removed from Wishlist");
-    dispatch({
-      type: Actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST,
-      payload: product
-    });
+    addOrRemoveFromWish(dispatch, product, wishList);
   };
 
   return (
     <>
       <div className="h5 text--bold spacing text--center"> Your Wishlist </div>
-      {wishList.length === 0 ? (
+      {getFilteredList(wishList).length === 0 ? (
         <div className="text--center h6 text--gray">Your wishlist is empty</div>
       ) : (
         <div className="product-showcase">
-          {wishList.map((product) => {
+          {getFilteredList(wishList).map((product) => {
             const { id, name, image, price, brand, offer } = product;
             return (
               <div key={id} className="card card--product">
@@ -55,7 +47,7 @@ function WishList() {
                     <span className="text--primary body--md"> {offer} </span>
                   </p>
                   <button
-                    onClick={() => addItemToCart(product)}
+                    onClick={() => addItemToCartList(product)}
                     className="button button--primary button--sm text-white subtitle--sm"
                   >
                     Move to Cart

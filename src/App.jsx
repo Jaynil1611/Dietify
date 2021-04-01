@@ -5,11 +5,12 @@ import { useAxios } from "./api";
 import { useEffect } from "react";
 import { useProduct } from "./contexts";
 import { Actions } from "./reducers";
+import { getFilteredList } from "./reducers";
 
 export default function App() {
   const {
     state: { wishList, cartList },
-    dispatch
+    dispatch,
   } = useProduct();
   const [productList, loadingStatus] = useAxios("/api/products");
   const [wishItems] = useAxios("api/wishes");
@@ -19,15 +20,15 @@ export default function App() {
     if (cartItems.carts) {
       dispatch({
         type: Actions.INITIALIZE_CART,
-        payload: cartItems.carts
+        payload: cartItems.carts,
       });
       dispatch({
         type: Actions.INITIALIZE_WISH,
-        payload: wishItems.wishes
+        payload: wishItems.wishes,
       });
       dispatch({
         type: Actions.INITIALIZE_PRODUCTS,
-        payload: productList.products
+        payload: productList.products,
       });
     }
   }, [cartItems]);
@@ -49,7 +50,7 @@ export default function App() {
                 >
                   <i className="fas fa-heart fa-lg">
                     <span className="badge__icon text-white badge__icon badge--overlay">
-                      {wishList.length}
+                      {getFilteredList(wishList).length}
                     </span>
                   </i>
                 </Link>
@@ -61,7 +62,7 @@ export default function App() {
                 >
                   <i className="fas fa-shopping-cart fa-lg">
                     <span className="badge__icon text-white badge__icon badge--overlay">
-                      {cartList.length}
+                      {getFilteredList(cartList).length}
                     </span>
                   </i>
                 </Link>
