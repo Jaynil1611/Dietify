@@ -1,0 +1,33 @@
+.toast--position {
+  display: flex;
+  z-index: 2;
+  top: 6rem;
+  right: 0.1rem;
+  bottom: auto;
+  background: var(--secondary-color);
+}
+
+.close--align {
+  position: absolute;
+  right: 0.2rem;
+}
+
+.content--padding {
+  padding: 0;
+  margin-right: 1.3rem;
+}
+
+@media screen and (min-width: 648px) {
+  .toast--position {
+    right: 1rem;
+  }
+
+  .close--align {
+    right: 1rem;
+  }
+
+  .content--padding {
+    padding: 0 1rem;
+    padding-right: 2rem;
+  }
+}

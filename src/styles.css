@@ -1,0 +1,57 @@
+@import url("https://mind-ui-library.netlify.app/style.css");
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #000000;
+  --text-white: rgba(255, 255, 255, 0.92);
+}
+
+body {
+  color: var(--text-color);
+}
+
+.heading {
+  background-color: var(--light-color);
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9;
+  padding: 0.5rem 1rem;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+}
+
+.main-content {
+  margin-top: 20%;
+}
+
+.body--spacing {
+  margin: 1rem;
+}
+
+.text-white {
+  color: var(--text-white);
+}
+
+.badge__container {
+  position: relative;
+  top: 0;
+}
+
+.badge--overlay {
+  top: 0.3rem;
+  left: 2.6rem;
+}
+
+@media screen and (min-width: 648px) {
+  .main-content {
+    margin-top: 6rem;
+  }
+
+  .body--spacing {
+    margin: 2rem;
+  }
+}
