@@ -92,7 +92,7 @@ function Product({ loading }) {
               Clear All
             </button>
           </div>
-          <div className="filter__section"> 
+          <div className="filter__section">
             <fieldset className="fieldset--style spacing--vh">
               <legend> Price Sort by </legend>
               <div>

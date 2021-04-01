@@ -72,15 +72,13 @@ export default function App() {
         </div>
         <div className="main-content">
           <Toast />
-          <div>
-            <Switch>
-              <Route exact path="/">
-                <Product loading={loadingStatus} />
-              </Route>
-              <Route exact path="/wish" component={WishList} />
-              <Route exact path="/cart" component={Cart} />
-            </Switch>
-          </div>
+          <Switch>
+            <Route exact path="/">
+              <Product loading={loadingStatus} />
+            </Route>
+            <Route exact path="/wish" component={WishList} />
+            <Route exact path="/cart" component={Cart} />
+          </Switch>
         </div>
       </Router>
     </div>

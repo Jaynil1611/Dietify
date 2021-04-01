@@ -14,7 +14,7 @@
 .filter__heading {
   display: flex;
   margin: 1rem 0;
-  width: 100%;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -112,7 +112,7 @@
 
   .product__filter--wrapper {
     display: flex;
-    width: 100%;
+    width: 98%;
     margin: 1rem;
   }
 
