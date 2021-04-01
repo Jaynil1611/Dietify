@@ -26,7 +26,7 @@ body {
 }
 
 .main-content {
-  margin-top: 20%;
+  margin-top: 30%;
 }
 
 .body--spacing {
@@ -53,6 +53,6 @@ body {
   }
 
   .body--spacing {
-    margin: 2rem;
+    margin: 1rem;
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Product.css";
 import { useProduct } from "../../contexts";
 import { Actions } from "../../reducers";
@@ -12,10 +12,11 @@ function Product({ loading }) {
       showOutOfStock,
       showFastDeliveryOnly,
       productList,
-      search
+      search,
     },
-    dispatch
+    dispatch,
   } = useProduct();
+  const [showFilter, setShowFilter] = useState(false);
 
   const sortPriceLowToHigh = () => {
     dispatch({ type: Actions.PRICE_LOW_TO_HIGH });
@@ -70,8 +71,69 @@ function Product({ loading }) {
             placeholder="Search products"
           />
         </div>
-        <div className="filter__heading">
-          <span className="subtitle--md">Filters</span>
+      </div>
+      <div className="product__filter--wrapper">
+        <div
+          className={`${
+            showFilter ? "product__filter--mobile" : "product__filter"
+          } `}
+        >
+          <div className="filter__heading">
+            <button
+              onClick={() => setShowFilter(!showFilter)}
+              className="button button--outline button--sm subtitle--sm"
+            >
+              {showFilter ? "Apply" : "Filters"}
+            </button>
+            <button
+              className="button button--primary text--white button--sm subtitle--sm"
+              onClick={clearAllFilters}
+            >
+              Clear All
+            </button>
+          </div>
+          <div className="filter__section"> 
+            <fieldset className="fieldset--style spacing--vh">
+              <legend> Price Sort by </legend>
+              <div>
+                <input
+                  onChange={sortPriceLowToHigh}
+                  checked={sortBy && sortBy === Actions.PRICE_LOW_TO_HIGH}
+                  type="radio"
+                  name="sort"
+                />
+                <label> Low to High </label>
+              </div>
+              <div>
+                <input
+                  onChange={sortPriceHighToLow}
+                  type="radio"
+                  name="sort"
+                  checked={sortBy && sortBy === Actions.PRICE_HIGH_TO_LOW}
+                />
+                <label> High to Low </label>
+              </div>
+            </fieldset>
+            <fieldset className="fieldset--style spacing--vh">
+              <legend> Availability </legend>
+              <div>
+                <input onChange={filterOutOfStock} type="checkbox" />
+                <label> Include Out of Stock </label>
+              </div>
+              <div>
+                <input onChange={filterFastDelivery} type="checkbox" />
+                <label> Fast Delivery </label>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <div className={`${showFilter ? "hide" : "filter__panel--heading"}`}>
+          <button
+            className="button button--outline button--sm subtitle--sm"
+            onClick={() => setShowFilter(!showFilter)}
+          >
+            Filters
+          </button>
           <button
             className="button button--primary text--white button--sm subtitle--sm"
             onClick={clearAllFilters}
@@ -79,44 +141,14 @@ function Product({ loading }) {
             Clear All
           </button>
         </div>
-        <fieldset className="fieldset--style spacing--vh">
-          <legend> Price Sort by </legend>
-          <div>
-            <input
-              onChange={sortPriceLowToHigh}
-              checked={sortBy && sortBy === Actions.PRICE_LOW_TO_HIGH}
-              type="radio"
-              name="sort"
-            />
-            <label> Low to High </label>
-          </div>
-          <div>
-            <input
-              onChange={sortPriceHighToLow}
-              type="radio"
-              name="sort"
-              checked={sortBy && sortBy === Actions.PRICE_HIGH_TO_LOW}
-            />
-            <label> High to Low </label>
-          </div>
-        </fieldset>
-        <fieldset className="fieldset--style spacing--vh">
-          <legend> Availability </legend>
-          <div>
-            <input onChange={filterOutOfStock} type="checkbox" />
-            <label> Include Out of Stock </label>
-          </div>
-          <div>
-            <input onChange={filterFastDelivery} type="checkbox" />
-            <label> Fast Delivery </label>
-          </div>
-        </fieldset>
+        {searchedData.length > 0 ? (
+          <ProductListing productList={searchedData} />
+        ) : (
+          search && (
+            <div className="h6 text--center"> No items found with {search}</div>
+          )
+        )}
       </div>
-      {searchedData.length > 0 ? (
-        <ProductListing productList={searchedData} />
-      ) : (
-        search && <div className="h6"> No items found with {search}</div>
-      )}
     </div>
   );
 }
