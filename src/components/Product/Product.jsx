@@ -73,7 +73,7 @@ function Product({ loading }) {
         <div className="filter__heading">
           <span className="subtitle--md">Filters</span>
           <button
-            className="button button--primary text-white button--sm subtitle--sm"
+            className="button button--primary text--white button--sm subtitle--sm"
             onClick={clearAllFilters}
           >
             Clear All

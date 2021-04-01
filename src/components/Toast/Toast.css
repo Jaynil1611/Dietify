@@ -4,6 +4,7 @@
   top: 6rem;
   right: 0.1rem;
   bottom: auto;
+  padding: 0.5rem 1rem;
   background: var(--secondary-color);
 }
 
@@ -20,6 +21,7 @@
 @media screen and (min-width: 648px) {
   .toast--position {
     right: 1rem;
+    padding: 1rem;
   }
 
   .close--align {

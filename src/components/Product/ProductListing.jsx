@@ -24,27 +24,20 @@ const ProductListing = ({ productList }) => {
                 onClick={() => addOrRemoveFromWish(dispatch, product, wishList)}
               ></i>
             </div>
-            <img className="img--responsive" src={image} alt="" />
-            <h3 className="card__heading spacing--horiz name--align">{name}</h3>
-            <div className="card__content card__content--align spacing--hz">
-              <p className="subtitle--sm">{brand}</p>
-              <p className="spacing--vh">
-                <span className="subtitle--md text--bold ">Rs.{price}</span>
-                <span className="text--primary body--md"> {offer} </span>
-              </p>
+            <ProductImage image={image} />
+            <ProductName name={name} />
+            <div className="card__content card__content--align">
+              <ProductContent price={price} brand={brand} offer={offer} />
               {checkItemExist(cartList, id) ? (
-                <button className="button button--primary button--sm subtitle--sm">
-                  <Link className="text-white" to="/cart">
+                <PrimaryButton>
+                  <Link className="text--white" to="/cart">
                     Go to Cart
                   </Link>
-                </button>
+                </PrimaryButton>
               ) : (
-                <button
-                  onClick={() => addItemToCart(dispatch, product)}
-                  className="button button--primary button--sm text-white subtitle--sm"
-                >
+                <PrimaryButton onClick={() => addItemToCart(dispatch, product)}>
                   Add to Cart
-                </button>
+                </PrimaryButton>
               )}
             </div>
           </div>
@@ -53,5 +46,34 @@ const ProductListing = ({ productList }) => {
     </div>
   );
 };
+
+export const ProductName = ({ name }) => (
+  <div className="card__heading name--align subtitle--md text--bold">
+    {name}
+  </div>
+);
+
+export const ProductImage = ({ image }) => (
+  <img className="img--responsive" src={image} alt="" />
+);
+
+export const ProductContent = ({ brand, offer, price }) => (
+  <>
+    <p className="subtitle--sm spacing--horiz">{brand}</p>
+    <p className="spacing--horiz spacing--p">
+      <span className="subtitle--md text--bold ">Rs.{price}</span>
+      <span className="text--primary body--md"> {offer} </span>
+    </p>
+  </>
+);
+
+export const PrimaryButton = ({ children, onClick }) => (
+  <button
+    onClick={onClick}
+    className="button button--primary button--sm subtitle--sm text--white"
+  >
+    {children}
+  </button>
+);
 
 export default ProductListing;

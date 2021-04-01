@@ -5,6 +5,12 @@ import { useProduct } from "../../contexts";
 import { Actions, getFilteredList } from "../../reducers";
 import { handleToast } from "../Toast/Toast";
 import { removeFromCart, addOrRemoveFromWish } from "../index";
+import {
+  ProductImage,
+  ProductName,
+  PrimaryButton,
+  ProductContent,
+} from "../index";
 
 const getTotalPrice = (cartList) => {
   return cartList.reduce((totalPrice, { price, cartQuantity }) => {
@@ -62,7 +68,7 @@ function Cart() {
               className="button button--primary button--sm subtitle--sm"
               onClick={showConfirmation}
             >
-              <Link to="/" className="text-white">
+              <Link to="/" className="text--white">
                 Place Order
               </Link>
             </button>
@@ -80,43 +86,30 @@ function Cart() {
               } = product;
               return (
                 <div key={id} className="card card--product">
-                  <img className="img--responsive" src={image} alt="" />
-                  <h3 className="card__heading spacing--horiz name--align">
-                    {name}
-                  </h3>
-                  <div className="card__content card__content--align spacing--hz">
-                    <p className="subtitle--sm">{brand}</p>
-                    <p className="spacing--vh">
-                      <span className="subtitle--md text--bold ">
-                        Rs.{price}
-                      </span>
-                      <span className="text--primary body--md"> {offer} </span>
-                    </p>
-                    <div className="spacing--vh">
-                      <button
-                        onClick={() => incrementQuantity(id)}
-                        className="button button--primary button--sm text-white subtitle--sm"
-                      >
+                  <ProductImage image={image} />
+                  <ProductName name={name} />
+                  <div className="card__content card__content--align">
+                    <ProductContent price={price} brand={brand} offer={offer} />
+                    <div className="spacing--horiz spacing--vh">
+                      <PrimaryButton onClick={() => incrementQuantity(id)}>
                         +
-                      </button>
-                      <span className="spacing--hz">{cartQuantity}</span>
-                      <button
+                      </PrimaryButton>
+                      <span className="spacing--horiz">{cartQuantity}</span>
+                      <PrimaryButton
                         onClick={() => decrementQuantity(product, cartQuantity)}
-                        className="button button--primary button--sm text-white subtitle--sm"
                       >
                         {cartQuantity === 1 ? (
                           <i className="fas fa-trash-alt fa-lg"></i>
                         ) : (
                           "-"
                         )}
-                      </button>
+                      </PrimaryButton>
                     </div>
-                    <button
+                    <PrimaryButton
                       onClick={() => removeFromCartAddToWishList(product)}
-                      className="button button--primary button--sm text-white subtitle--sm"
                     >
                       Move to Wishlist
-                    </button>
+                    </PrimaryButton>
                   </div>
                 </div>
               );

@@ -12,31 +12,31 @@ const database = [...Array(24)].map((_) => ({
     "Walgreens farm",
     "Patanjali",
     "Pristine Organics",
-    "24 Mantra"
+    "24 Mantra",
   ]),
   inStock: faker.datatype.boolean(),
   fastDelivery: faker.datatype.boolean(),
   ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
   offer: faker.random.arrayElement([
-    "Save 50",
+    "50% off sundays",
     "70% bonanza",
-    "Republic Day Sale"
+    "Republic Day Sale",
   ]),
   idealFor: faker.random.arrayElement([
     "20-30",
     "5-12",
     "35-50",
     "50-65",
-    "65+"
+    "65+",
   ]),
   level: faker.random.arrayElement([
     "beginner",
     "amateur",
     "intermediate",
     "advanced",
-    "professional"
+    "professional",
   ]),
-  color: faker.commerce.color()
+  color: faker.commerce.color(),
 }));
 
 export default database;

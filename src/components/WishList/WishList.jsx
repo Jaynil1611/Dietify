@@ -3,6 +3,12 @@ import "./WishList.css";
 import { useProduct } from "../../contexts";
 import { addItemToCart, addOrRemoveFromWish } from "../index";
 import { getFilteredList } from "../../reducers";
+import {
+  ProductImage,
+  ProductName,
+  PrimaryButton,
+  ProductContent,
+} from "../index";
 
 function WishList() {
   const {
@@ -36,22 +42,13 @@ function WishList() {
                     onClick={() => removeFromWishList(product)}
                   ></i>
                 </div>
-                <img className="img--responsive" src={image} alt="" />
-                <h3 className="card__heading spacing--horiz name--align">
-                  {name}
-                </h3>
-                <div className="card__content card__content--align spacing--hz">
-                  <p className="subtitle--sm">{brand}</p>
-                  <p className="spacing--vh">
-                    <span className="subtitle--md text--bold ">Rs.{price}</span>
-                    <span className="text--primary body--md"> {offer} </span>
-                  </p>
-                  <button
-                    onClick={() => addItemToCartList(product)}
-                    className="button button--primary button--sm text-white subtitle--sm"
-                  >
+                <ProductImage image={image} />
+                <ProductName name={name} />
+                <div className="card__content card__content--align">
+                  <ProductContent price={price} brand={brand} offer={offer} />
+                  <PrimaryButton onClick={() => addItemToCartList(product)}>
                     Move to Cart
-                  </button>
+                  </PrimaryButton>
                 </div>
               </div>
             );

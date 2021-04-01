@@ -1,8 +1,8 @@
 .product-showcase {
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-gap: 1rem;
-  margin: 2rem 0;
+  grid-gap: 0.5rem;
+  margin: 1rem 0;
 }
 
 .card--product {
@@ -11,11 +11,13 @@
   max-width: 100%;
   border: none;
   justify-content: flex-start;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
 }
 
 .card__content--align {
   display: flex;
   flex: 1;
+  padding: 0;
   flex-direction: column;
   width: 100%;
 }
@@ -35,18 +37,26 @@
 .name--align {
   display: flex;
   flex: 1;
+  padding: 0.5rem;
 }
 
 .spacing--hz {
   padding: 0.5rem 1rem;
 }
 
-.spacing--vh {
-  padding: 0.5rem 0;
+.spacing--horiz {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
-.spacing--horiz {
-  padding: 0 1rem;
+.spacing--vh {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.spacing--p {
+  flex: 1;
+  padding-bottom: 0.5rem;
 }
 
 @media screen and (min-width: 648px) {

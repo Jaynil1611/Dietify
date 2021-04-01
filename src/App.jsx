@@ -49,7 +49,7 @@ export default function App() {
                   to="/wish"
                 >
                   <i className="fas fa-heart fa-lg">
-                    <span className="badge__icon text-white badge__icon badge--overlay">
+                    <span className="badge__icon text--white badge__icon badge--overlay">
                       {getFilteredList(wishList).length}
                     </span>
                   </i>
@@ -61,7 +61,7 @@ export default function App() {
                   to="/cart"
                 >
                   <i className="fas fa-shopping-cart fa-lg">
-                    <span className="badge__icon text-white badge__icon badge--overlay">
+                    <span className="badge__icon text--white badge__icon badge--overlay">
                       {getFilteredList(cartList).length}
                     </span>
                   </i>

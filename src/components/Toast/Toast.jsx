@@ -26,13 +26,13 @@ const Toast = () => {
   return (
     <>
       {showToast && (
-        <div className="toast toast--position text-white">
+        <div className="toast toast--position text--white">
           <span className="toast__content content--padding">
             {toastMessage}
           </span>
           <button
             type="button"
-            className="toast--close close--align"
+            className="toast--close close--align text--white"
             onClick={() => closeToast(dispatch)}
           >
             <i className="fas fa-times"></i>
