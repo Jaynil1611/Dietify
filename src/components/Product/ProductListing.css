@@ -11,6 +11,7 @@
   max-width: 100%;
   border: none;
   justify-content: flex-start;
+  background: var(--background-color);
   box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
 }
 
