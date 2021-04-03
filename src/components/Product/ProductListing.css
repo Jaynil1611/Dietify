@@ -3,6 +3,7 @@
   grid-template-columns: repeat(2, auto);
   grid-gap: 0.5rem;
   margin: 1rem 0;
+  margin-bottom: 3rem;
 }
 
 .card--product {
@@ -64,6 +65,7 @@
   .product-showcase {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 2rem;
+    height: -webkit-fill-available;
   }
 
   .spacing--horiz {
