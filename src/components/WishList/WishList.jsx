@@ -1,7 +1,7 @@
 import React from "react";
 import "./WishList.css";
 import { useProduct } from "../../contexts";
-import { addItemToCart, addOrRemoveFromWish } from "../index";
+import { addItemToCart, addOrRemoveFromWish } from "../../server";
 import { getFilteredList } from "../../reducers";
 import {
   ProductImage,

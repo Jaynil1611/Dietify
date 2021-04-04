@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import "./Product.css";
 import { useProduct } from "../../contexts";
-import { Actions } from "../../reducers";
+import { actions } from "../../reducers";
 import ProductListing from "./ProductListing";
 import { getFilteredData, getSearchedData, getSortedData } from "./Filter";
+import { PrimaryButton } from "./ProductListing";
+import "./Product.css";
 
 function Product({ loading }) {
   const {
@@ -19,27 +20,27 @@ function Product({ loading }) {
   const [showFilter, setShowFilter] = useState(false);
 
   const sortPriceLowToHigh = () => {
-    dispatch({ type: Actions.PRICE_LOW_TO_HIGH });
+    dispatch({ type: actions.PRICE_LOW_TO_HIGH });
   };
 
   const sortPriceHighToLow = () => {
-    dispatch({ type: Actions.PRICE_HIGH_TO_LOW });
+    dispatch({ type: actions.PRICE_HIGH_TO_LOW });
   };
 
   const filterOutOfStock = () => {
-    dispatch({ type: Actions.FILTER_OUT_OF_STOCK });
+    dispatch({ type: actions.FILTER_OUT_OF_STOCK });
   };
 
   const filterFastDelivery = () => {
-    dispatch({ type: Actions.FILTER_FAST_DELIVERY });
+    dispatch({ type: actions.FILTER_FAST_DELIVERY });
   };
 
   const clearAllFilters = () => {
-    dispatch({ type: Actions.CLEAR_ALL_FILTERS });
+    dispatch({ type: actions.CLEAR_ALL_FILTERS });
   };
 
   const searchProduct = (search) => {
-    dispatch({ type: Actions.UPDATE_SEARCH_TEXT, payload: search });
+    dispatch({ type: actions.UPDATE_SEARCH_TEXT, payload: search });
   };
 
   const sortedData = getSortedData(sortBy, productList);
@@ -48,7 +49,6 @@ function Product({ loading }) {
     showFastDeliveryOnly,
     sortedData
   );
-
   const searchedData = getSearchedData(filteredData, search);
 
   return (
@@ -61,17 +61,7 @@ function Product({ loading }) {
           <span> {searchedData.length} </span>
         )}
       </div>
-      <div className="filter-options">
-        <div className="input__search">
-          <i className="fas fa-search fa-lg search__icon"></i>
-          <input
-            type="text"
-            className="input search-bar"
-            onChange={(e) => searchProduct(e.target.value)}
-            placeholder="Search products"
-          />
-        </div>
-      </div>
+      <SearchProducts />
       <div className="product__filter--wrapper">
         <div
           className={`${
@@ -79,18 +69,10 @@ function Product({ loading }) {
           } `}
         >
           <div className="filter__heading">
-            <button
-              onClick={() => setShowFilter(!showFilter)}
-              className="button button--outline button--sm subtitle--sm"
-            >
+            <SecondaryButton onClick={() => setShowFilter(!showFilter)}>
               {showFilter ? "Apply" : "Filters"}
-            </button>
-            <button
-              className="button button--primary text--white button--sm subtitle--sm"
-              onClick={clearAllFilters}
-            >
-              Clear All
-            </button>
+            </SecondaryButton>
+            <PrimaryButton onClick={clearAllFilters}>Clear All</PrimaryButton>
           </div>
           <div className="filter__section">
             <fieldset className="fieldset--style spacing--vh">
@@ -98,7 +80,7 @@ function Product({ loading }) {
               <div>
                 <input
                   onChange={sortPriceLowToHigh}
-                  checked={sortBy && sortBy === Actions.PRICE_LOW_TO_HIGH}
+                  checked={sortBy && sortBy === actions.PRICE_LOW_TO_HIGH}
                   type="radio"
                   name="sort"
                 />
@@ -109,7 +91,7 @@ function Product({ loading }) {
                   onChange={sortPriceHighToLow}
                   type="radio"
                   name="sort"
-                  checked={sortBy && sortBy === Actions.PRICE_HIGH_TO_LOW}
+                  checked={sortBy && sortBy === actions.PRICE_HIGH_TO_LOW}
                 />
                 <label> High to Low </label>
               </div>
@@ -128,18 +110,10 @@ function Product({ loading }) {
           </div>
         </div>
         <div className={`${showFilter ? "hide" : "filter__panel--heading"}`}>
-          <button
-            className="button button--outline button--sm subtitle--sm"
-            onClick={() => setShowFilter(!showFilter)}
-          >
+          <SecondaryButton onClick={() => setShowFilter(!showFilter)}>
             Filters
-          </button>
-          <button
-            className="button button--primary text--white button--sm subtitle--sm"
-            onClick={clearAllFilters}
-          >
-            Clear All
-          </button>
+          </SecondaryButton>
+          <PrimaryButton onClick={clearAllFilters}>Clear All</PrimaryButton>
         </div>
         {searchedData.length > 0 ? (
           <ProductListing productList={searchedData} />
@@ -152,5 +126,32 @@ function Product({ loading }) {
     </div>
   );
 }
+
+export const SearchProducts = () => {
+  return (
+    <div className="filter-options">
+      <div className="input__search">
+        <i className="fas fa-search fa-lg search__icon"></i>
+        <input
+          type="text"
+          className="input search-bar"
+          onChange={(e) => searchProduct(e.target.value)}
+          placeholder="Search products"
+        />
+      </div>
+    </div>
+  );
+};
+
+export const SecondaryButton = ({ children, onClick }) => {
+  return (
+    <button
+      className="button button--outline button--sm subtitle--sm"
+      onClick={onClick}
+    >
+      {children}
+    </button>
+  );
+};
 
 export default Product;

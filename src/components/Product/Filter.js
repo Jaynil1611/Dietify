@@ -1,11 +1,11 @@
-import { Actions } from "../../reducers";
+import { actions } from "../../reducers";
 
 const getSortedData = (sortBy, productList) => {
-  return sortBy === Actions.PRICE_LOW_TO_HIGH
+  return sortBy === actions.PRICE_LOW_TO_HIGH
     ? [...productList].sort(
         (item1, item2) => Number(item1.price) - Number(item2.price)
       )
-    : sortBy === Actions.PRICE_HIGH_TO_LOW
+    : sortBy === actions.PRICE_HIGH_TO_LOW
     ? [...productList].sort(
         (item1, item2) => Number(item2.price) - Number(item1.price)
       )

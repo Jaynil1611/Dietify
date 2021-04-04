@@ -1,8 +1,8 @@
-import "./ProductListing.css";
 import { useProduct } from "../../contexts";
 import { checkItemExist } from "../../reducers";
 import { Link } from "react-router-dom";
-import { addOrRemoveFromWish, addItemToCart } from "./ServerUpdate";
+import { addOrRemoveFromWish, addItemToCart } from "../../server";
+import "./ProductListing.css";
 
 const ProductListing = ({ productList }) => {
   const {

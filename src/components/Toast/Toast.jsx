@@ -1,10 +1,10 @@
-import { Actions } from "../../reducers";
+import { actions } from "../../reducers";
 import { useProduct } from "../../contexts";
 import "./Toast.css";
 
 export const handleToast = (dispatch, text) => {
   dispatch({
-    type: Actions.OPEN_OR_CLOSE_TOAST,
+    type: actions.OPEN_OR_CLOSE_TOAST,
     payload: { show: true, text },
   });
   setTimeout(() => closeToast(dispatch), 1000);
@@ -12,7 +12,7 @@ export const handleToast = (dispatch, text) => {
 
 const closeToast = (dispatch) => {
   dispatch({
-    type: Actions.OPEN_OR_CLOSE_TOAST,
+    type: actions.OPEN_OR_CLOSE_TOAST,
     payload: { show: false, text: "" },
   });
 };

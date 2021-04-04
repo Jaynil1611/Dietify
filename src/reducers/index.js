@@ -1,3 +1,3 @@
 export { default as productReducer } from "./productReducer";
-export { Actions } from "./Actions";
+export { actions } from "./Actions";
 export { appendItem, checkItemExist, getFilteredList } from "./utils";

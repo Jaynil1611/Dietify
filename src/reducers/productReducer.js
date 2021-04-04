@@ -1,84 +1,74 @@
-import { Actions } from "./Actions";
+import { actions } from "./Actions";
 import { appendItem, updateQuantity, removeItemFromCartList } from "./utils";
 
-const productReducer = (prevState, action) => {
-  switch (action.type) {
-    case Actions.INITIALIZE_PRODUCTS:
+const productReducer = (prevState, { type, payload }) => {
+  switch (type) {
+    case actions.INITIALIZE_LIST:
       return {
         ...prevState,
-        productList: action.payload,
+        [payload.name]: payload.data,
       };
-    case Actions.INITIALIZE_WISH:
+    case actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST:
       return {
         ...prevState,
-        wishList: action.payload,
+        wishList: appendItem(prevState.wishList, payload, "wish"),
       };
-    case Actions.INITIALIZE_CART:
+    case actions.ADD_ITEM_TO_CART:
       return {
         ...prevState,
-        cartList: action.payload,
+        cartList: appendItem(prevState.cartList, payload),
       };
-    case Actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST:
-      return {
-        ...prevState,
-        wishList: appendItem(prevState.wishList, action.payload, "wish"),
-      };
-    case Actions.ADD_ITEM_TO_CART:
-      return {
-        ...prevState,
-        cartList: appendItem(prevState.cartList, action.payload),
-      };
-    case Actions.UPDATE_QUANTITY:
+    case actions.UPDATE_QUANTITY:
       return {
         ...prevState,
         cartList: updateQuantity(
           prevState.cartList,
-          action.payload.id,
-          action.payload.incOrDec
+          payload.id,
+          payload.incOrDec
         ),
       };
-    case Actions.REMOVE_FROM_CART:
+    case actions.REMOVE_FROM_CART:
       return {
         ...prevState,
-        cartList: removeItemFromCartList(prevState.cartList, action.payload.id),
+        cartList: removeItemFromCartList(prevState.cartList, payload.id),
       };
-    case Actions.PRICE_HIGH_TO_LOW:
+    case actions.PRICE_HIGH_TO_LOW:
       return {
         ...prevState,
-        sortBy: Actions.PRICE_HIGH_TO_LOW,
+        sortBy: actions.PRICE_HIGH_TO_LOW,
       };
-    case Actions.PRICE_LOW_TO_HIGH:
+    case actions.PRICE_LOW_TO_HIGH:
       return {
         ...prevState,
-        sortBy: Actions.PRICE_LOW_TO_HIGH,
+        sortBy: actions.PRICE_LOW_TO_HIGH,
       };
-    case Actions.FILTER_OUT_OF_STOCK:
+    case actions.FILTER_OUT_OF_STOCK:
       return {
         ...prevState,
         showOutOfStock: !prevState.showOutOfStock,
       };
-    case Actions.FILTER_FAST_DELIVERY:
+    case actions.FILTER_FAST_DELIVERY:
       return {
         ...prevState,
         showFastDeliveryOnly: !prevState.showFastDeliveryOnly,
       };
-    case Actions.CLEAR_ALL_FILTERS:
+    case actions.CLEAR_ALL_FILTERS:
       return {
         ...prevState,
         sortBy: "",
         showOutOfStock: false,
         showFastDeliveryOnly: false,
       };
-    case Actions.UPDATE_SEARCH_TEXT:
+    case actions.UPDATE_SEARCH_TEXT:
       return {
         ...prevState,
-        search: action.payload,
+        search: payload,
       };
-    case Actions.OPEN_OR_CLOSE_TOAST:
+    case actions.OPEN_OR_CLOSE_TOAST:
       return {
         ...prevState,
-        showToast: action.payload.show,
-        toastMessage: action.payload.text,
+        showToast: payload.show,
+        toastMessage: payload.text,
       };
     default:
       return prevState;
