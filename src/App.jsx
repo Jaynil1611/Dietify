@@ -38,7 +38,7 @@ export default function App() {
       <Router>
         <div className="heading">
           <h1>
-            <Link to="/">Dietify</Link>
+            <Link to="/home">Dietify</Link>
           </h1>
           <nav>
             <ul className="nav nav--right">
@@ -73,12 +73,12 @@ export default function App() {
         <div className="main-content">
           <Toast />
           <Switch>
-            <Route exact path="/products">
+            <Route exact path="/">
               <Product loading={loadingStatus} />
             </Route>
             <Route exact path="/wish" component={WishList} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/" component={Product} />
+            <Route exact path="/home" component={Home} />
           </Switch>
         </div>
       </Router>

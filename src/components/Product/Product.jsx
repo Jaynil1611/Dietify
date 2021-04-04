@@ -61,7 +61,17 @@ function Product({ loading }) {
           <span> {searchedData.length} </span>
         )}
       </div>
-      <SearchProducts />
+      <div className="filter-options">
+        <div className="input__search">
+          <i className="fas fa-search fa-lg search__icon"></i>
+          <input
+            type="text"
+            className="input search-bar"
+            onChange={(e) => searchProduct(e.target.value)}
+            placeholder="Search products"
+          />
+        </div>
+      </div>
       <div className="product__filter--wrapper">
         <div
           className={`${
@@ -126,22 +136,6 @@ function Product({ loading }) {
     </div>
   );
 }
-
-export const SearchProducts = () => {
-  return (
-    <div className="filter-options">
-      <div className="input__search">
-        <i className="fas fa-search fa-lg search__icon"></i>
-        <input
-          type="text"
-          className="input search-bar"
-          onChange={(e) => searchProduct(e.target.value)}
-          placeholder="Search products"
-        />
-      </div>
-    </div>
-  );
-};
 
 export const SecondaryButton = ({ children, onClick }) => {
   return (
