@@ -1,17 +1,13 @@
 const checkItemExist = (list, productId) => {
-  const res = list.filter(
-    ({ id, status }) =>
-      id === productId && (status ? status !== "deleted" : true)
+  return list.find(
+    ({ id, status }) => id === productId && status !== "deleted"
   );
-  return res.length > 0 ? true : false;
 };
 
 const appendItem = (list, product, wish) => {
-  return checkItemExist(list, product.id)
-    ? wish === "wish"
-      ? removeItem(list, product.id)
-      : list
-    : list.concat({ ...product, cartQuantity: 1 });
+  if (checkItemExist(list, product.id))
+    return wish === "wish" ? removeItem(list, product.id) : list;
+  return list.concat({ ...product, cartQuantity: 1 });
 };
 
 const removeItem = (list, productId) => {
@@ -33,7 +29,7 @@ const updateQuantity = (list, productId, incOrDec) => {
         : { ...product, cartQuantity: cartQuantity - 1 };
     }
     return product;
-  }, []);
+  });
 };
 
 const getFilteredList = (list) => {
