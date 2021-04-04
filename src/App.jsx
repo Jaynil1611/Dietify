@@ -1,10 +1,10 @@
 import "./styles.css";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
-import { Cart, Product, Toast, WishList } from "./components";
-import { useAxios } from "./api";
+import { Cart, Product, Toast, WishList, Home } from "./components";
+import { useAxios } from "./server";
 import { useEffect } from "react";
 import { useProduct } from "./contexts";
-import { Actions } from "./reducers";
+import { actions } from "./reducers";
 import { getFilteredList } from "./reducers";
 
 export default function App() {
@@ -19,16 +19,16 @@ export default function App() {
   useEffect(() => {
     if (cartItems.carts) {
       dispatch({
-        type: Actions.INITIALIZE_CART,
-        payload: cartItems.carts,
+        type: actions.INITIALIZE_LIST,
+        payload: { name: "productList", data: productList.products },
       });
       dispatch({
-        type: Actions.INITIALIZE_WISH,
-        payload: wishItems.wishes,
+        type: actions.INITIALIZE_LIST,
+        payload: { name: "wishList", data: wishItems.wishes },
       });
       dispatch({
-        type: Actions.INITIALIZE_PRODUCTS,
-        payload: productList.products,
+        type: actions.INITIALIZE_LIST,
+        payload: { name: "cartList", data: cartItems.carts },
       });
     }
   }, [cartItems]);
@@ -73,11 +73,12 @@ export default function App() {
         <div className="main-content">
           <Toast />
           <Switch>
-            <Route exact path="/">
+            <Route exact path="/products">
               <Product loading={loadingStatus} />
             </Route>
             <Route exact path="/wish" component={WishList} />
             <Route exact path="/cart" component={Cart} />
+            <Route exact path="/" component={Product} />
           </Switch>
         </div>
       </Router>

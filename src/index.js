@@ -1,6 +1,6 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { setupMockServer } from "./api";
+import { setupMockServer } from "./server";
 
 import App from "./App";
 import { ProductProvider } from "./contexts";

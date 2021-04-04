@@ -2,9 +2,9 @@ import React from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../contexts";
-import { Actions, getFilteredList } from "../../reducers";
+import { actions, getFilteredList } from "../../reducers";
 import { handleToast } from "../Toast/Toast";
-import { removeFromCart, addOrRemoveFromWish } from "../index";
+import { removeFromCart, addOrRemoveFromWish } from "../../server";
 import {
   ProductImage,
   ProductName,
@@ -26,7 +26,7 @@ function Cart() {
 
   const incrementQuantity = (id) => {
     dispatch({
-      type: Actions.UPDATE_QUANTITY,
+      type: actions.UPDATE_QUANTITY,
       payload: { id, incOrDec: true },
     });
   };
@@ -35,7 +35,7 @@ function Cart() {
     quantity === 1
       ? removeFromCart(dispatch, product)
       : dispatch({
-          type: Actions.UPDATE_QUANTITY,
+          type: actions.UPDATE_QUANTITY,
           payload: { id: product.id, incOrDec: false },
         });
   };

@@ -1,0 +1,29 @@
+.hero {
+  min-height: 100vh;
+  position: relative;
+  width: 97.5vw;
+  display: flex;
+  align-items: center;
+}
+
+.hero__img {
+  background-image: url("https://s3.us-west-2.amazonaws.com/secure.notion-static.com/fd4402d2-6d89-43b2-98da-19c340c66a99/hero.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210403%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210403T110858Z&X-Amz-Expires=86400&X-Amz-Signature=e9e6655026ab6f3d6895fa6eb6ab35db777d649a3278043dc583425945e85222&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22hero.jpg%22");
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-size: cover;
+  background-position: 60%;
+}
+
+.hero__heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero__container {
+  width: 100%;
+  position: relative;
+}
