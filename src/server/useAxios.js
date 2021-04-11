@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
+import { useProduct } from "../contexts";
 import { callMockServer } from "./index";
+import { actions } from "../reducers";
 
-export default function useAxios(url) {
-  const [data, setData] = useState([]);
+export default function useAxios(resource, name) {
+  const { dispatch } = useProduct();
   const [loadingStatus, setLoadingStatus] = useState(false);
   const [error, setError] = useState(false);
   useEffect(() => {
     setLoadingStatus(true);
-
     (async () => {
       try {
-        const { response, error } = await callMockServer({
+        const {
+          response: { data },
+          error,
+        } = await callMockServer({
           type: "get",
-          url,
+          url: `/api/${resource}`,
         });
         if (!error) {
-          setData(response.data);
+          dispatch({
+            type: actions.INITIALIZE_LIST,
+            payload: { name, data: data[resource] },
+          });
         }
       } catch (error) {
         setError(true);
@@ -25,5 +32,5 @@ export default function useAxios(url) {
     })();
   }, []);
 
-  return [data, loadingStatus, error];
+  return { loadingStatus, error };
 }

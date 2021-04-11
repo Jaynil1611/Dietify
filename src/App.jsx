@@ -2,9 +2,7 @@ import "./styles.css";
 import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Cart, Product, Toast, WishList, Home } from "./components";
 import { useAxios } from "./server";
-import { useEffect } from "react";
 import { useProduct } from "./contexts";
-import { actions } from "./reducers";
 import { getFilteredList } from "./reducers";
 
 export default function App() {
@@ -12,33 +10,19 @@ export default function App() {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
-  const [productList, loadingStatus] = useAxios("/api/products");
-  const [wishItems] = useAxios("api/wishes");
-  const [cartItems] = useAxios("api/carts");
-
-  useEffect(() => {
-    if (cartItems.carts) {
-      dispatch({
-        type: actions.INITIALIZE_LIST,
-        payload: { name: "productList", data: productList.products },
-      });
-      dispatch({
-        type: actions.INITIALIZE_LIST,
-        payload: { name: "wishList", data: wishItems.wishes },
-      });
-      dispatch({
-        type: actions.INITIALIZE_LIST,
-        payload: { name: "cartList", data: cartItems.carts },
-      });
-    }
-  }, [cartItems]);
+  const { loadingStatus: productLoadingStatus } = useAxios(
+    "products",
+    "productList"
+  );
+  const { loadingStatus: wishLoadingStatus } = useAxios("wishes", "wishList");
+  const { loadingStatus: cartLoadingStatus } = useAxios("carts", "cartList");
 
   return (
     <div className="body--spacing">
       <Router>
         <div className="heading">
           <h1>
-            <Link to="/home">Dietify</Link>
+            <Link to="/">Dietify</Link>
           </h1>
           <nav>
             <ul className="nav nav--right">
@@ -73,12 +57,12 @@ export default function App() {
         <div className="main-content">
           <Toast />
           <Switch>
-            <Route exact path="/">
-              <Product loading={loadingStatus} />
+            <Route exact path="/products">
+              <Product loading={productLoadingStatus} />
             </Route>
             <Route exact path="/wish" component={WishList} />
             <Route exact path="/cart" component={Cart} />
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
           </Switch>
         </div>
       </Router>

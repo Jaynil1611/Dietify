@@ -1,14 +1,26 @@
 import React from "react";
 import "./Home.css";
+import { PrimaryButton } from "../index";
+import { Link } from "react-router-dom";
 
-function Home(props) {
+function Home() {
   return (
     <div className="hero">
       <div className="hero__img img--responsive"></div>
       <div className="hero__container">
         <div className="hero__heading h6 text--center text--bold">
-          Find what you love
-          
+          Purchase nutirients rich products personalised for you!
+        </div>
+        <div className="hero__content text--gray text--center">
+          Find your favourite food from a extensive collection of healthy food
+          items.
+        </div>
+        <div>
+          <PrimaryButton>
+            <Link to="/products" className="text--white button--large">
+              Shop Now
+            </Link>
+          </PrimaryButton>
         </div>
       </div>
     </div>

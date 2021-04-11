@@ -1,5 +1,6 @@
 .product-container {
-  margin-top: 2rem;
+  margin-top: 6rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
 }
@@ -102,6 +103,10 @@
 @media screen and (min-width: 648px) {
   .search-bar {
     padding-left: 3rem;
+  }
+
+  .product-container{
+    margin-bottom: 0;
   }
 
   .input__search {

@@ -1,7 +1,7 @@
 /* @import url("https://mind-ui-library.netlify.app/mind-ui.css"); */
 
 :root {
-  --background-color: #ffffff;
+  --background-color: #FEFEFE;
   --text-color: #000000;
   --text-white: rgba(255, 255, 255, 0.92);
 }
@@ -26,8 +26,8 @@ body {
 }
 
 .main-content {
-  margin-top: 30%;
-  margin-bottom: 2rem;
+  /* margin-top: 30%; */
+  /* margin-bottom: 2rem; */
 }
 
 .body--spacing {
@@ -50,7 +50,7 @@ body {
 
 @media screen and (min-width: 648px) {
   .main-content {
-    margin-top: 6rem;
+   margin-top: 4rem;
   }
 
   .body--spacing {

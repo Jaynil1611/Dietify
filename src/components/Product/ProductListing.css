@@ -3,7 +3,6 @@
   grid-template-columns: repeat(2, auto);
   grid-gap: 0.5rem;
   margin: 1rem 0;
-  margin-bottom: 3rem;
 }
 
 .card--product {
@@ -41,7 +40,7 @@
   flex: 1;
   padding: 0.5rem;
 }
-
+/* 
 .spacing--hz {
   padding: 0.5rem 1rem;
 }
@@ -54,11 +53,16 @@
 .spacing--vh {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-}
+} */
 
 .spacing--p {
   flex: 1;
   padding-bottom: 0.5rem;
+}
+
+.img--gray {
+  filter: grayscale(1);
+  opacity: 0.6;
 }
 
 @media screen and (min-width: 648px) {

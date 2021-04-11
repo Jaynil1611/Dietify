@@ -13,7 +13,7 @@ const ProductListing = ({ productList }) => {
   return (
     <div className="product-showcase">
       {productList.map((product) => {
-        const { id, name, image, price, brand, offer } = product;
+        const { id, name, image, price, brand, offer, inStock } = product;
         return (
           <div key={id} className="card card--product">
             <div className="card__badge badge--position">
@@ -24,7 +24,7 @@ const ProductListing = ({ productList }) => {
                 onClick={() => addOrRemoveFromWish(dispatch, product, wishList)}
               ></i>
             </div>
-            <ProductImage image={image} />
+            <ProductImage image={image} inStock={inStock} />
             <ProductName name={name} />
             <div className="card__content card__content--align">
               <ProductContent price={price} brand={brand} offer={offer} />
@@ -53,8 +53,12 @@ export const ProductName = ({ name }) => (
   </div>
 );
 
-export const ProductImage = ({ image }) => (
-  <img className="img--responsive" src={image} alt="" />
+export const ProductImage = ({ image, inStock }) => (
+  <img
+    className={`img--responsive ${inStock ? "img--gray" : ""}`}
+    src={image}
+    alt=""
+  />
 );
 
 export const ProductContent = ({ brand, offer, price }) => (
