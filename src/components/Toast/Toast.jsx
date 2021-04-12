@@ -27,16 +27,8 @@ const Toast = () => {
     <>
       {showToast && (
         <div className="toast toast--position text--white">
-          <span className="toast__content content--padding">
-            {toastMessage}
-          </span>
-          <button
-            type="button"
-            className="toast--close close--align text--white"
-            onClick={() => closeToast(dispatch)}
-          >
-            <i className="fas fa-times"></i>
-          </button>
+          <i className="fas fa-check-circle fa-lg"></i>
+          <span className="toast__content">{toastMessage}</span>
         </div>
       )}
     </>
