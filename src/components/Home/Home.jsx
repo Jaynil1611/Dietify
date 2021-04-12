@@ -1,7 +1,7 @@
 import React from "react";
-import "./Home.css";
 import { PrimaryButton } from "../index";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 function Home() {
   return (
