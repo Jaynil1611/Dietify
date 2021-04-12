@@ -18,16 +18,32 @@ const getFilteredData = (showOutOfStock, showFastDeliveryOnly, productList) => {
     .filter(({ fastDelivery }) => (showFastDeliveryOnly ? fastDelivery : true));
 };
 
+const getPriceRangeData = (maxPrice, productList) => {
+  return productList.filter(({ price }) => price < Number(maxPrice));
+};
+
 const matchData = (data, search) => data.toLowerCase().includes(search);
 
 const compare = ({ name, brand }, search) => {
   return matchData(name, search) || matchData(brand, search);
 };
 
-const getSearchedData = (productList, search) => {
+const getSearchedData = (search, productList) => {
   return search
     ? productList.filter((product) => compare(product, search.toLowerCase()))
     : productList;
 };
 
-export { getFilteredData, getSortedData, getSearchedData };
+const getFilteredList = (list) => {
+  return list.filter(
+    ({ status, inStock }) => status !== "deleted" && inStock === true
+  );
+};
+
+export {
+  getFilteredData,
+  getSortedData,
+  getSearchedData,
+  getPriceRangeData,
+  getFilteredList,
+};

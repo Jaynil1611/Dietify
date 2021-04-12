@@ -3,7 +3,7 @@ import { Link, Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import { Cart, Product, Toast, WishList, Home } from "./components";
 import { useAxios } from "./server";
 import { useProduct } from "./contexts";
-import { getFilteredList } from "./reducers";
+import { getFilteredList } from "./components";
 
 export default function App() {
   const {

@@ -11,10 +11,6 @@ const appendItem = (list, product, wish) => {
 };
 
 const removeItem = (list, productId) => {
-  return list.filter(({ id }) => id !== productId);
-};
-
-const removeItemFromCartList = (list, productId) => {
   return list.map((product) =>
     product.id === productId ? { ...product, status: "deleted" } : product
   );
@@ -32,15 +28,4 @@ const updateQuantity = (list, productId, incOrDec) => {
   });
 };
 
-const getFilteredList = (list) => {
-  return list.filter(({ status }) => status !== "deleted");
-};
-
-export {
-  checkItemExist,
-  appendItem,
-  updateQuantity,
-  removeItem,
-  removeItemFromCartList,
-  getFilteredList,
-};
+export { checkItemExist, appendItem, updateQuantity, removeItem };
