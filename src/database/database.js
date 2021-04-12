@@ -19,7 +19,7 @@ const database = [...Array(24)].map((_) => ({
   ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
   offer: faker.random.arrayElement([
     "50% off sundays",
-    "70% bonanza",
+    "70% bonanza sale",
     "Republic Day Sale",
   ]),
   idealFor: faker.random.arrayElement([

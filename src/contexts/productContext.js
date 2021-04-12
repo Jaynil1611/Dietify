@@ -17,7 +17,8 @@ export const ProductProvider = ({ children }) => {
     showFastDeliveryOnly: false,
     search: "",
     showToast: false,
-    toastMessage: ""
+    toastMessage: "",
+    priceRange: 1000,
   });
 
   return (

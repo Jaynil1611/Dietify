@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { useProduct } from "../../contexts";
 import { actions } from "../../reducers";
 import ProductListing from "./ProductListing";
-import { getFilteredData, getSearchedData, getSortedData } from "./Filter";
+import {
+  getFilteredData,
+  getSearchedData,
+  getSortedData,
+  getPriceRangeData,
+} from "./Filter";
 import { PrimaryButton } from "./ProductListing";
 import "./Product.css";
 
@@ -14,6 +19,7 @@ function Product({ loading }) {
       showFastDeliveryOnly,
       productList,
       search,
+      priceRange,
     },
     dispatch,
   } = useProduct();
@@ -43,13 +49,21 @@ function Product({ loading }) {
     dispatch({ type: actions.UPDATE_SEARCH_TEXT, payload: search });
   };
 
+  const handleSliderChange = (e) => {
+    dispatch({
+      type: actions.UPDATE_PRICE_RANGE,
+      payload: { value: e.target.value },
+    });
+  };
+
   const sortedData = getSortedData(sortBy, productList);
   const filteredData = getFilteredData(
     showOutOfStock,
     showFastDeliveryOnly,
     sortedData
   );
-  const searchedData = getSearchedData(filteredData, search);
+  const priceRangeData = getPriceRangeData(priceRange, filteredData);
+  const searchedData = getSearchedData(search, priceRangeData);
 
   return (
     <div className="product-container">
@@ -61,17 +75,7 @@ function Product({ loading }) {
           <span> {searchedData.length} </span>
         )}
       </div>
-      <div className="filter-options">
-        <div className="input__search">
-          <i className="fas fa-search fa-lg search__icon"></i>
-          <input
-            type="text"
-            className="input search-bar"
-            onChange={(e) => searchProduct(e.target.value)}
-            placeholder="Search products"
-          />
-        </div>
-      </div>
+      <FilterOptions searchProduct={searchProduct} />
       <div className="product__filter--wrapper">
         <div
           className={`${
@@ -84,40 +88,15 @@ function Product({ loading }) {
             </SecondaryButton>
             <PrimaryButton onClick={clearAllFilters}>Clear All</PrimaryButton>
           </div>
-          <div className="filter__section">
-            <fieldset className="fieldset--style spacing--vh">
-              <legend> Price Sort by </legend>
-              <div>
-                <input
-                  onChange={sortPriceLowToHigh}
-                  checked={sortBy && sortBy === actions.PRICE_LOW_TO_HIGH}
-                  type="radio"
-                  name="sort"
-                />
-                <label> Low to High </label>
-              </div>
-              <div>
-                <input
-                  onChange={sortPriceHighToLow}
-                  type="radio"
-                  name="sort"
-                  checked={sortBy && sortBy === actions.PRICE_HIGH_TO_LOW}
-                />
-                <label> High to Low </label>
-              </div>
-            </fieldset>
-            <fieldset className="fieldset--style spacing--vh">
-              <legend> Availability </legend>
-              <div>
-                <input onChange={filterOutOfStock} type="checkbox" />
-                <label> Include Out of Stock </label>
-              </div>
-              <div>
-                <input onChange={filterFastDelivery} type="checkbox" />
-                <label> Fast Delivery </label>
-              </div>
-            </fieldset>
-          </div>
+          <FilterSection
+            sortBy={sortBy}
+            filterFastDelivery={filterFastDelivery}
+            filterOutOfStock={filterOutOfStock}
+            sortPriceHighToLow={sortPriceHighToLow}
+            sortPriceLowToHigh={sortPriceLowToHigh}
+            handleSliderChange={handleSliderChange}
+            priceRange={priceRange}
+          />
         </div>
         <div className={`${showFilter ? "hide" : "filter__panel--heading"}`}>
           <SecondaryButton onClick={() => setShowFilter(!showFilter)}>
@@ -137,15 +116,86 @@ function Product({ loading }) {
   );
 }
 
-export const SecondaryButton = ({ children, onClick }) => {
-  return (
-    <button
-      className="button button--outline button--sm subtitle--sm"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-};
+const FilterOptions = ({ searchProduct }) => (
+  <div className="filter-options">
+    <div className="input__search">
+      <i className="fas fa-search fa-lg search__icon"></i>
+      <input
+        type="text"
+        className="input search-bar"
+        onChange={(e) => searchProduct(e.target.value)}
+        placeholder="Search products"
+      />
+    </div>
+  </div>
+);
+
+const FilterSection = ({
+  sortPriceLowToHigh,
+  sortPriceHighToLow,
+  sortBy,
+  filterOutOfStock,
+  filterFastDelivery,
+  handleSliderChange,
+  priceRange,
+}) => (
+  <div className="filter__section">
+    <fieldset className="fieldset--style spacing--vh">
+      <legend> Price Sort by </legend>
+      <div>
+        <input
+          onChange={sortPriceLowToHigh}
+          checked={sortBy && sortBy === actions.PRICE_LOW_TO_HIGH}
+          type="radio"
+          name="sort"
+        />
+        <label> Low to High </label>
+      </div>
+      <div>
+        <input
+          onChange={sortPriceHighToLow}
+          type="radio"
+          name="sort"
+          checked={sortBy && sortBy === actions.PRICE_HIGH_TO_LOW}
+        />
+        <label> High to Low </label>
+      </div>
+    </fieldset>
+    <fieldset className="fieldset--style spacing--vh">
+      <legend> Availability </legend>
+      <div>
+        <input onChange={filterOutOfStock} type="checkbox" />
+        <label> Include Out of Stock </label>
+      </div>
+      <div>
+        <input onChange={filterFastDelivery} type="checkbox" />
+        <label> Fast Delivery </label>
+      </div>
+    </fieldset>
+    <fieldset className="fieldset--style spacing-vh">
+      <legend> Price Range</legend>
+      <div>
+        <input
+          type="range"
+          min="100"
+          max="1200"
+          step="100"
+          defaultValue={priceRange}
+          onChange={handleSliderChange}
+        />
+        <label>Rs.{priceRange}</label>
+      </div>
+    </fieldset>
+  </div>
+);
+
+const SecondaryButton = ({ children, onClick }) => (
+  <button
+    className="button button--outline button--sm subtitle--sm"
+    onClick={onClick}
+  >
+    {children}
+  </button>
+);
 
 export default Product;

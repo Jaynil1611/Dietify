@@ -1,5 +1,5 @@
 import { actions } from "./Actions";
-import { appendItem, updateQuantity, removeItemFromCartList } from "./utils";
+import { appendItem, updateQuantity, removeItem } from "./utils";
 
 const productReducer = (prevState, { type, payload }) => {
   switch (type) {
@@ -30,7 +30,7 @@ const productReducer = (prevState, { type, payload }) => {
     case actions.REMOVE_FROM_CART:
       return {
         ...prevState,
-        cartList: removeItemFromCartList(prevState.cartList, payload.id),
+        cartList: removeItem(prevState.cartList, payload.id),
       };
     case actions.PRICE_HIGH_TO_LOW:
       return {
@@ -56,8 +56,10 @@ const productReducer = (prevState, { type, payload }) => {
       return {
         ...prevState,
         sortBy: "",
+        search: "",
         showOutOfStock: false,
         showFastDeliveryOnly: false,
+        priceRange: 1000,
       };
     case actions.UPDATE_SEARCH_TEXT:
       return {
@@ -69,6 +71,11 @@ const productReducer = (prevState, { type, payload }) => {
         ...prevState,
         showToast: payload.show,
         toastMessage: payload.text,
+      };
+    case actions.UPDATE_PRICE_RANGE:
+      return {
+        ...prevState,
+        priceRange: payload.value,
       };
     default:
       return prevState;

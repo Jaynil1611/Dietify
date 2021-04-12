@@ -13,7 +13,16 @@ const ProductListing = ({ productList }) => {
   return (
     <div className="product-showcase">
       {productList.map((product) => {
-        const { id, name, image, price, brand, offer, inStock } = product;
+        const {
+          id,
+          name,
+          image,
+          price,
+          brand,
+          offer,
+          inStock,
+          ratings,
+        } = product;
         return (
           <div key={id} className="card card--product">
             <div className="card__badge badge--position">
@@ -25,9 +34,10 @@ const ProductListing = ({ productList }) => {
               ></i>
             </div>
             <ProductImage image={image} inStock={inStock} />
-            <ProductName name={name} />
+            <ProductName name={name} ratings={ratings} />
             <div className="card__content card__content--align">
               <ProductContent price={price} brand={brand} offer={offer} />
+              <ProductOutOfStock inStock={inStock} />
               {checkItemExist(cartList, id) ? (
                 <PrimaryButton>
                   <Link className="text--white" to="/cart">
@@ -35,7 +45,10 @@ const ProductListing = ({ productList }) => {
                   </Link>
                 </PrimaryButton>
               ) : (
-                <PrimaryButton onClick={() => addItemToCart(dispatch, product)}>
+                <PrimaryButton
+                  inStock={inStock}
+                  onClick={() => addItemToCart(dispatch, product)}
+                >
                   Add to Cart
                 </PrimaryButton>
               )}
@@ -47,15 +60,19 @@ const ProductListing = ({ productList }) => {
   );
 };
 
-export const ProductName = ({ name }) => (
+export const ProductName = ({ name, ratings }) => (
   <div className="card__heading name--align subtitle--md text--bold">
-    {name}
+    <span>{name}</span>
+    <div className="rating--align text--white body--md">
+      {ratings}
+      <i className="fas fa-star fa-xs rating__icon"></i>
+    </div>
   </div>
 );
 
 export const ProductImage = ({ image, inStock }) => (
   <img
-    className={`img--responsive ${inStock ? "img--gray" : ""}`}
+    className={`img--responsive ${inStock ? "" : "img--gray"}`}
     src={image}
     alt=""
   />
@@ -63,7 +80,7 @@ export const ProductImage = ({ image, inStock }) => (
 
 export const ProductContent = ({ brand, offer, price }) => (
   <>
-    <p className="subtitle--sm spacing--horiz">{brand}</p>
+    <p className="subtitle--sm spacing--horiz spacing--p">{brand}</p>
     <p className="spacing--horiz spacing--p">
       <span className="subtitle--md text--bold ">Rs.{price}</span>
       <span className="text--primary body--md"> {offer} </span>
@@ -71,9 +88,20 @@ export const ProductContent = ({ brand, offer, price }) => (
   </>
 );
 
-export const PrimaryButton = ({ children, onClick }) => (
+export const ProductOutOfStock = ({ inStock }) => {
+  return !inStock ? (
+    <div className="out-of-stock">
+      <p> OUT OF STOCK</p>
+    </div>
+  ) : (
+    <></>
+  );
+};
+
+export const PrimaryButton = ({ children, onClick, inStock }) => (
   <button
     onClick={onClick}
+    disabled={!inStock}
     className="button button--primary button--sm subtitle--sm text--white"
   >
     {children}

@@ -2,7 +2,7 @@ import React from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../contexts";
-import { actions, getFilteredList } from "../../reducers";
+import { actions } from "../../reducers";
 import { handleToast } from "../Toast/Toast";
 import { removeFromCart, addOrRemoveFromWish } from "../../server";
 import {
@@ -10,6 +10,8 @@ import {
   ProductName,
   PrimaryButton,
   ProductContent,
+  ProductOutOfStock,
+  getFilteredList,
 } from "../index";
 
 const getTotalPrice = (cartList) => {
@@ -83,14 +85,17 @@ function Cart() {
                 brand,
                 offer,
                 cartQuantity,
+                inStock,
+                ratings,
               } = product;
               return (
                 <div key={id} className="card card--product">
-                  <ProductImage image={image} />
-                  <ProductName name={name} />
+                  <ProductImage image={image} inStock={inStock} />
+                  <ProductName name={name} ratings={ratings} />
                   <div className="card__content card__content--align">
                     <ProductContent price={price} brand={brand} offer={offer} />
-                    <div className="spacing--horiz spacing--vh">
+                    <ProductOutOfStock inStock={inStock} />
+                    <div className="spacing--sm">
                       <PrimaryButton onClick={() => incrementQuantity(id)}>
                         +
                       </PrimaryButton>

@@ -2,12 +2,13 @@ import React from "react";
 import "./WishList.css";
 import { useProduct } from "../../contexts";
 import { addItemToCart, addOrRemoveFromWish } from "../../server";
-import { getFilteredList } from "../../reducers";
 import {
   ProductImage,
   ProductName,
   PrimaryButton,
   ProductContent,
+  ProductOutOfStock,
+  getFilteredList,
 } from "../index";
 
 function WishList() {
@@ -33,7 +34,16 @@ function WishList() {
       ) : (
         <div className="product-showcase">
           {getFilteredList(wishList).map((product) => {
-            const { id, name, image, price, brand, offer } = product;
+            const {
+              id,
+              name,
+              image,
+              price,
+              brand,
+              offer,
+              inStock,
+              ratings,
+            } = product;
             return (
               <div key={id} className="card card--product">
                 <div className={`card__badge badge--position`}>
@@ -42,10 +52,11 @@ function WishList() {
                     onClick={() => removeFromWishList(product)}
                   ></i>
                 </div>
-                <ProductImage image={image} />
-                <ProductName name={name} />
+                <ProductImage image={image} inStock={inStock} />
+                <ProductName name={name} ratings={ratings} />
                 <div className="card__content card__content--align">
                   <ProductContent price={price} brand={brand} offer={offer} />
+                  <ProductOutOfStock inStock={inStock} />
                   <PrimaryButton onClick={() => addItemToCartList(product)}>
                     Move to Cart
                   </PrimaryButton>
