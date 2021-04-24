@@ -10,7 +10,7 @@ export default function App() {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
-  useAxios("products", "productList");
+  const { loadingStatus } = useAxios("products", "productList");
   useAxios("wishes", "wishList");
   useAxios("cart", "cartList");
 
@@ -55,7 +55,7 @@ export default function App() {
           <Toast />
           <Switch>
             <Route exact path="/products">
-              <Product />
+              <Product loading={loadingStatus} />
             </Route>
             <Route exact path="/wish" component={WishList} />
             <Route exact path="/cart" component={Cart} />
