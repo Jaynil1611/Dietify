@@ -18,7 +18,7 @@ const { initializeDBConnection } = require("./db/db.connect");
 const { createUser } = require("./models/user.model");
 const { storeProducts } = require("./models/product.model");
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // called before any route handler
 initializeDBConnection();
