@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const dotenv = require("dotenv");
+
+dotenv.config();
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -15,7 +18,7 @@ const { initializeDBConnection } = require("./db/db.connect");
 const { createUser } = require("./models/user.model");
 const { storeProducts } = require("./models/product.model");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // called before any route handler
 initializeDBConnection();
@@ -38,12 +41,10 @@ app.get("/", (request, response) => {
  * & Note: DO not MOVE. This should be the last route
  */
 app.use((req, res) => {
-  res
-    .status(404)
-    .json({
-      success: false,
-      message: "route not found on server, please check",
-    });
+  res.status(404).json({
+    success: false,
+    message: "route not found on server, please check",
+  });
 });
 
 /**
@@ -52,13 +53,11 @@ app.use((req, res) => {
  */
 app.use((err, req, res, next) => {
   console.error(err.stack);
-  res
-    .status(500)
-    .json({
-      success: false,
-      message: "error occured, see the errMessage key for more details",
-      errorMessage: err.message,
-    });
+  res.status(500).json({
+    success: false,
+    message: "error occured, see the errMessage key for more details",
+    errorMessage: err.message,
+  });
 });
 
 app.listen(PORT, () => {
