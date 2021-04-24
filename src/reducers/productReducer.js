@@ -9,9 +9,10 @@ const productReducer = (prevState, { type, payload }) => {
         [payload.name]: payload.data,
       };
     case actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST:
+      const { product, itemExists } = payload;
       return {
         ...prevState,
-        wishList: appendItem(prevState.wishList, payload, "wish"),
+        wishList: appendItem(prevState.wishList, product, itemExists),
       };
     case actions.ADD_ITEM_TO_CART:
       return {
@@ -21,11 +22,7 @@ const productReducer = (prevState, { type, payload }) => {
     case actions.UPDATE_QUANTITY:
       return {
         ...prevState,
-        cartList: updateQuantity(
-          prevState.cartList,
-          payload.id,
-          payload.incOrDec
-        ),
+        cartList: updateQuantity(prevState.cartList, payload.product),
       };
     case actions.REMOVE_FROM_CART:
       return {

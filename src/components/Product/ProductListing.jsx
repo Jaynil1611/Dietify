@@ -47,7 +47,7 @@ const ProductListing = ({ productList }) => {
               ) : (
                 <PrimaryButton
                   inStock={inStock}
-                  onClick={() => addItemToCart(dispatch, product)}
+                  onClick={() => addItemToCart(dispatch, product, cartList)}
                 >
                   Add to Cart
                 </PrimaryButton>
@@ -101,7 +101,7 @@ export const ProductOutOfStock = ({ inStock }) => {
 export const PrimaryButton = ({ children, onClick, inStock }) => (
   <button
     onClick={onClick}
-    disabled={!inStock}
+    disabled={inStock ? !inStock : false}
     className="button button--primary button--sm subtitle--sm text--white"
   >
     {children}

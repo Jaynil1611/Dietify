@@ -2,9 +2,12 @@ import React from "react";
 import "./Cart.css";
 import { Link } from "react-router-dom";
 import { useProduct } from "../../contexts";
-import { actions } from "../../reducers";
 import { handleToast } from "../Toast/Toast";
-import { removeFromCart, addOrRemoveFromWish } from "../../server";
+import {
+  removeFromCart,
+  addOrRemoveFromWish,
+  updateCartItem,
+} from "../../server";
 import {
   ProductImage,
   ProductName,
@@ -26,19 +29,19 @@ function Cart() {
     dispatch,
   } = useProduct();
 
-  const incrementQuantity = (id) => {
-    dispatch({
-      type: actions.UPDATE_QUANTITY,
-      payload: { id, incOrDec: true },
+  const incrementQuantity = (product) => {
+    updateCartItem(dispatch, {
+      ...product,
+      cartQuantity: product.cartQuantity + 1,
     });
   };
 
   const decrementQuantity = (product, quantity) => {
     quantity === 1
       ? removeFromCart(dispatch, product)
-      : dispatch({
-          type: actions.UPDATE_QUANTITY,
-          payload: { id: product.id, incOrDec: false },
+      : updateCartItem(dispatch, {
+          ...product,
+          cartQuantity: product.cartQuantity - 1,
         });
   };
 
@@ -96,7 +99,7 @@ function Cart() {
                     <ProductContent price={price} brand={brand} offer={offer} />
                     <ProductOutOfStock inStock={inStock} />
                     <div className="spacing--sm">
-                      <PrimaryButton onClick={() => incrementQuantity(id)}>
+                      <PrimaryButton onClick={() => incrementQuantity(product)}>
                         +
                       </PrimaryButton>
                       <span className="spacing--horiz">{cartQuantity}</span>

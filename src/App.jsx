@@ -10,19 +10,16 @@ export default function App() {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
-  const { loadingStatus: productLoadingStatus } = useAxios(
-    "products",
-    "productList"
-  );
-  const { loadingStatus: wishLoadingStatus } = useAxios("wishes", "wishList");
-  const { loadingStatus: cartLoadingStatus } = useAxios("carts", "cartList");
+  useAxios("products", "productList");
+  useAxios("wishes", "wishList");
+  useAxios("cart", "cartList");
 
   return (
     <div className="body--spacing">
       <Router>
         <div className="heading">
           <h1>
-            <Link to="/">Dietify</Link>
+            <Link to="/products">Dietify</Link>
           </h1>
           <nav>
             <ul className="nav nav--right">
@@ -58,7 +55,7 @@ export default function App() {
           <Toast />
           <Switch>
             <Route exact path="/products">
-              <Product loading={productLoadingStatus} />
+              <Product />
             </Route>
             <Route exact path="/wish" component={WishList} />
             <Route exact path="/cart" component={Cart} />

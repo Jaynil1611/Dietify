@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { setupMockServer } from "./server";
+// import { setupMockServer } from "./server";
 
 import App from "./App";
 import { ProductProvider } from "./contexts";
 
-setupMockServer();
+// setupMockServer();
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(

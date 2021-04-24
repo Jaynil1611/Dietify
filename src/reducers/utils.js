@@ -4,10 +4,8 @@ const checkItemExist = (list, productId) => {
   );
 };
 
-const appendItem = (list, product, wish) => {
-  if (checkItemExist(list, product.id))
-    return wish === "wish" ? removeItem(list, product.id) : list;
-  return list.concat({ ...product, cartQuantity: 1 });
+const appendItem = (list, product, itemExists) => {
+  return itemExists ? removeItem(list, product.id) : list.concat(product);
 };
 
 const removeItem = (list, productId) => {
@@ -16,15 +14,9 @@ const removeItem = (list, productId) => {
   );
 };
 
-const updateQuantity = (list, productId, incOrDec) => {
+const updateQuantity = (list, updatedProduct) => {
   return list.map((product) => {
-    const { id, cartQuantity } = product;
-    if (id === productId) {
-      return incOrDec
-        ? { ...product, cartQuantity: cartQuantity + 1 }
-        : { ...product, cartQuantity: cartQuantity - 1 };
-    }
-    return product;
+    return product.id === updatedProduct.id ? updatedProduct : product;
   });
 };
 

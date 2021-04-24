@@ -13,13 +13,13 @@ import {
 
 function WishList() {
   const {
-    state: { wishList },
+    state: { wishList, cartList },
     dispatch,
   } = useProduct();
 
   const addItemToCartList = (product) => {
     removeFromWishList(product);
-    addItemToCart(dispatch, product);
+    addItemToCart(dispatch, product, cartList);
   };
 
   const removeFromWishList = (product) => {

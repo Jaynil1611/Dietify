@@ -5,4 +5,5 @@ export {
   addItemToCart,
   addOrRemoveFromWish,
   removeFromCart,
+  updateCartItem,
 } from "./ServerUpdate";
