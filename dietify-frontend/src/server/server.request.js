@@ -35,7 +35,7 @@ async function callMockServer({ type, data, url }) {
     case "delete": {
       try {
         const response = await axios.delete(url, data);
-        return response.status === 204
+        return response.status === 200
           ? { response, error: false }
           : { response, error: true };
       } catch (error) {

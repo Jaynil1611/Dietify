@@ -4,14 +4,12 @@ const checkItemExist = (list, productId) => {
   );
 };
 
-const appendItem = (list, product, itemExists) => {
-  return itemExists ? removeItem(list, product.id) : list.concat(product);
+const appendItem = (list, product) => {
+  return list.concat(product);
 };
 
 const removeItem = (list, productId) => {
-  return list.map((product) =>
-    product.id === productId ? { ...product, status: "deleted" } : product
-  );
+  return list.filter(({ id }) => id !== productId);
 };
 
 const updateQuantity = (list, updatedProduct) => {

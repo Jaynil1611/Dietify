@@ -8,11 +8,15 @@ const productReducer = (prevState, { type, payload }) => {
         ...prevState,
         [payload.name]: payload.data,
       };
-    case actions.ADD_OR_REMOVE_ITEM_TO_WISHLIST:
-      const { product, itemExists } = payload;
+    case actions.ADD_ITEM_TO_WISHLIST:
       return {
         ...prevState,
-        wishList: appendItem(prevState.wishList, product, itemExists),
+        wishList: appendItem(prevState.wishList, payload),
+      };
+    case actions.REMOVE_ITEM_FROM_WISHLIST:
+      return {
+        ...prevState,
+        wishList: removeItem(prevState.wishList, payload.id),
       };
     case actions.ADD_ITEM_TO_CART:
       return {
