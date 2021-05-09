@@ -61,14 +61,14 @@ function Product({ loading }) {
     });
   };
 
-  const sortedData = getSortedData(sortBy, productList);
-  const filteredData = getFilteredData(
+  const sortedData = getSortedData({ sortBy, productList });
+  const filteredData = getFilteredData({
     showOutOfStock,
     showFastDeliveryOnly,
-    sortedData
-  );
-  const priceRangeData = getPriceRangeData(priceRange, filteredData);
-  const searchedData = getSearchedData(search, priceRangeData);
+    sortedData,
+  });
+  const priceRangeData = getPriceRangeData({priceRange, filteredData});
+  const searchedData = getSearchedData({search, priceRangeData});
 
   return (
     <div className="product-container">

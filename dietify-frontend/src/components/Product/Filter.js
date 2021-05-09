@@ -1,6 +1,6 @@
 import { actions } from "../../reducers";
 
-const getSortedData = (sortBy, productList) => {
+const getSortedData = ({ sortBy, productList }) => {
   return sortBy === actions.PRICE_LOW_TO_HIGH
     ? [...productList].sort(
         (item1, item2) => Number(item1.price) - Number(item2.price)
@@ -12,14 +12,18 @@ const getSortedData = (sortBy, productList) => {
     : productList;
 };
 
-const getFilteredData = (showOutOfStock, showFastDeliveryOnly, productList) => {
+const getFilteredData = ({
+  showOutOfStock,
+  showFastDeliveryOnly,
+  sortedData: productList,
+}) => {
   return productList
     .filter(({ inStock }) => (showOutOfStock ? true : inStock))
     .filter(({ fastDelivery }) => (showFastDeliveryOnly ? fastDelivery : true));
 };
 
-const getPriceRangeData = (maxPrice, productList) => {
-  return productList.filter(({ price }) => price < Number(maxPrice));
+const getPriceRangeData = ({ priceRange, filteredData: productList }) => {
+  return productList.filter(({ price }) => price < Number(priceRange));
 };
 
 const matchData = (data, search) => data.toLowerCase().includes(search);
@@ -28,7 +32,7 @@ const compare = ({ name, brand }, search) => {
   return matchData(name, search) || matchData(brand, search);
 };
 
-const getSearchedData = (search, productList) => {
+const getSearchedData = ({ search, priceRangeData: productList }) => {
   return search
     ? productList.filter((product) => compare(product, search.toLowerCase()))
     : productList;
