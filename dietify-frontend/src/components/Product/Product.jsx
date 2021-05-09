@@ -10,6 +10,8 @@ import {
 } from "./Filter";
 import { PrimaryButton } from "./ProductListing";
 import "./Product.css";
+import useToastCleaner from "../../utils/useToastCleaner";
+import { useDocumentTitle } from "../../utils";
 
 function Product({ loading }) {
   const {
@@ -23,6 +25,9 @@ function Product({ loading }) {
     },
     dispatch,
   } = useProduct();
+  useToastCleaner();
+  useDocumentTitle("Product");
+
   const [showFilter, setShowFilter] = useState(false);
 
   const sortPriceLowToHigh = () => {

@@ -10,12 +10,16 @@ import {
   ProductOutOfStock,
   getFilteredList,
 } from "../index";
+import useToastCleaner from "../../utils/useToastCleaner";
+import { useDocumentTitle } from "../../utils";
 
 function WishList() {
   const {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
+  useToastCleaner();
+  useDocumentTitle("Wishlist");
 
   const addItemToCartList = (product) => {
     removeFromWishList(product);

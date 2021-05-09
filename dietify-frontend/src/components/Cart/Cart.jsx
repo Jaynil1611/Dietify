@@ -16,6 +16,8 @@ import {
   ProductOutOfStock,
   getFilteredList,
 } from "../index";
+import useToastCleaner from "../../utils/useToastCleaner";
+import { useDocumentTitle } from "../../utils";
 
 const getTotalPrice = (cartList) => {
   return cartList.reduce((totalPrice, { price, cartQuantity }) => {
@@ -28,6 +30,8 @@ function Cart() {
     state: { cartList, wishList },
     dispatch,
   } = useProduct();
+  useToastCleaner();
+  useDocumentTitle("Cart");
 
   const incrementQuantity = (product) => {
     updateCartItem(dispatch, {
