@@ -1,6 +1,6 @@
 const { Cart } = require("../models/cart.model");
 const { extend } = require("lodash");
-const { getNormalizedList, getNormalizedProduct } = require("../utils/utils");
+const { getNormalizedList, getNormalizedProduct } = require("../utils");
 
 const getCartList = async (req, res) => {
   try {

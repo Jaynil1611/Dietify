@@ -1,6 +1,6 @@
 const { Wishlist } = require("../models/wishlist.model");
 const { extend } = require("lodash");
-const { getNormalizedList, getNormalizedProduct } = require("../utils/utils");
+const { getNormalizedList, getNormalizedProduct } = require("../utils");
 
 const getWishlist = async (req, res) => {
   try {

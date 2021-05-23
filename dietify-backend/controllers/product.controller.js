@@ -1,5 +1,5 @@
 const { Product } = require("../models/product.model");
-const { getNormalizedProductList } = require("../utils/utils");
+const { getNormalizedProductList } = require("../utils");
 
 const getProducts = async (req, res) => {
   try {
