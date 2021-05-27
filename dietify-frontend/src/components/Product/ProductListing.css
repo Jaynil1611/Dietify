@@ -95,6 +95,10 @@ input[type="range"] {
   border-radius: 0.3rem;
 }
 
+.width--100 {
+  width: 100%;
+}
+
 @media screen and (min-width: 648px) {
   .product-showcase {
     grid-template-columns: 1fr 1fr 1fr 1fr;

@@ -47,7 +47,7 @@ const ProductListing = ({ productList }) => {
               <ProductContent price={price} brand={brand} offer={offer} />
               {checkItemExist(cartList, id) ? (
                 <Link to="/cart">
-                  <PrimaryButton className="text--white">
+                  <PrimaryButton className="width--100">
                     Go to Cart
                   </PrimaryButton>
                 </Link>
