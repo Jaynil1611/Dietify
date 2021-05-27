@@ -1,8 +1,7 @@
 .product-container {
-  margin-top: 6rem;
-  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
+  margin: 6rem 0rem;
 }
 
 .filter-options {
@@ -14,7 +13,7 @@
 
 .filter__heading {
   display: flex;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
@@ -27,7 +26,7 @@
   box-shadow: 0 2px 5px rgba(0 0 0 / 20%);
   border-radius: 50px;
   padding: 0.5rem;
-  padding-left: 2rem;
+  padding-left: 2.5rem;
   border: 1px solid transparent;
 }
 
@@ -79,11 +78,10 @@
   background-color: var(--light-color);
   position: fixed;
   z-index: 4;
-  overflow-y: auto;
   top: 3.5rem;
   padding: 1rem 0.5rem;
   height: 100vh;
-  width: 98%;
+  width: 100%;
   bottom: 0;
 }
 
@@ -96,17 +94,39 @@
   outline: var(--primary-color);
 }
 
+.filter__divider {
+  background-color: #fed6bc;
+  width: 100%;
+  border: none;
+  height: 1px;
+  margin: 0.5rem 0;
+}
+
 .hide {
   display: none;
 }
 
+.button--outline-hidden {
+  border: var(--transparent-color);
+}
+
+.price-range--align {
+  display: flex;
+  flex-direction: column;
+}
+
 @media screen and (min-width: 648px) {
   .search-bar {
-    padding-left: 3rem;
+    padding: 1rem 3rem;
+  }
+
+  .search__icon {
+    top: 1.2rem;
+    left: 1rem;
   }
 
   .product-container {
-   margin-right: 1rem;
+    margin: 6rem 0.4rem;
   }
 
   .input__search {
@@ -133,7 +153,6 @@
     overflow-y: auto;
     position: sticky;
     height: calc(100vh - 4rem);
-    padding: 1rem 0;
   }
 
   .filter__section::-webkit-scrollbar {
@@ -155,5 +174,9 @@
 
   .button--outline {
     pointer-events: none;
+  }
+
+  .filter__divider {
+    height: 1.5px;
   }
 }

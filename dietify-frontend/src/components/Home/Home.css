@@ -1,13 +1,12 @@
 .hero {
   margin-top: 4rem;
-  min-height: 90vh;
+  min-height: 88vh;
   position: relative;
-  width: 97.5vw;
   display: flex;
 }
 
 .hero__img {
-  background-image: url("https://raw.githubusercontent.com/Jaynil1611/Coding-Archives/master/hero.jpg");
+  background-image: url("../../assets/hero.webp");
   position: absolute;
   top: 0;
   left: 0;
@@ -19,6 +18,11 @@
 
 .hero__heading {
   display: flex;
+  text-align: center;
+}
+
+.hero__content {
+  margin: 0.5rem;
 }
 
 .hero__container {
@@ -33,7 +37,7 @@
 @media screen and (min-width: 648px) {
   .hero {
     margin-top: 0;
-    min-height: 91vh;
+    min-height: 91.5vh;
   }
 
   .hero__img {
@@ -43,10 +47,13 @@
   .hero__heading {
     display: flex;
     font-size: 3rem;
+    margin: 0 auto 0 6rem;
+    text-align: left;
   }
 
   .hero__container {
     max-width: 60%;
+    text-align: left;
   }
 
   .hero__content {
@@ -55,6 +62,5 @@
 
   .button--large {
     font-size: 1.3rem;
-    padding: 1.3rem;
   }
 }

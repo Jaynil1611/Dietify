@@ -7,7 +7,7 @@ export const handleToast = (dispatch, text) => {
     type: actions.OPEN_OR_CLOSE_TOAST,
     payload: { show: true, text },
   });
-  setTimeout(() => closeToast(dispatch), 1000);
+  setTimeout(() => closeToast(dispatch), 2000);
 };
 
 export const closeToast = (dispatch) => {

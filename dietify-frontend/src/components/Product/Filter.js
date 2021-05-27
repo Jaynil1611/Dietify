@@ -39,9 +39,7 @@ const getSearchedData = ({ search, priceRangeData: productList }) => {
 };
 
 const getFilteredList = (list) => {
-  return list.filter(
-    ({ status, inStock }) => status !== "deleted" && inStock === true
-  );
+  return list.filter(({ inStock }) => inStock);
 };
 
 export {

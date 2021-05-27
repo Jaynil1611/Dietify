@@ -17,6 +17,7 @@ const ProductListing = ({ productList }) => {
           id,
           name,
           image,
+          fastDelivery,
           price,
           brand,
           offer,
@@ -33,23 +34,30 @@ const ProductListing = ({ productList }) => {
                 onClick={() => addOrRemoveFromWish(dispatch, product, wishList)}
               ></i>
             </div>
+            <div>
+              {fastDelivery && (
+                <span className="card__badge badge--fastdel body--sm">
+                  fast delivery
+                </span>
+              )}
+            </div>
             <ProductImage image={image} inStock={inStock} />
             <ProductName name={name} ratings={ratings} />
             <div className="card__content card__content--align">
               <ProductContent price={price} brand={brand} offer={offer} />
-              <ProductOutOfStock inStock={inStock} />
               {checkItemExist(cartList, id) ? (
-                <PrimaryButton>
-                  <Link className="text--white" to="/cart">
+                <Link to="/cart">
+                  <PrimaryButton className="text--white">
                     Go to Cart
-                  </Link>
-                </PrimaryButton>
+                  </PrimaryButton>
+                </Link>
               ) : (
                 <PrimaryButton
                   inStock={inStock}
+                  className={inStock ? "" : "out-of-stock"}
                   onClick={() => addItemToCart(dispatch, product, cartList)}
                 >
-                  Add to Cart
+                  {inStock ? "Add to Cart" : "Out of Stock"}
                 </PrimaryButton>
               )}
             </div>
@@ -61,7 +69,7 @@ const ProductListing = ({ productList }) => {
 };
 
 export const ProductName = ({ name, ratings }) => (
-  <div className="card__heading name--align subtitle--md text--bold">
+  <div className="card__heading name--align text--bold">
     <span>{name}</span>
     <div className="rating--align text--white body--md">
       {ratings}
@@ -88,21 +96,11 @@ export const ProductContent = ({ brand, offer, price }) => (
   </>
 );
 
-export const ProductOutOfStock = ({ inStock }) => {
-  return !inStock ? (
-    <div className="out-of-stock">
-      <p> OUT OF STOCK</p>
-    </div>
-  ) : (
-    <></>
-  );
-};
-
-export const PrimaryButton = ({ children, onClick, inStock }) => (
+export const PrimaryButton = ({ children, onClick, inStock, className }) => (
   <button
     onClick={onClick}
     disabled={inStock ? !inStock : false}
-    className="button button--primary button--sm subtitle--sm text--white"
+    className={`button button--primary button--sm subtitle--sm text--white ${className}`}
   >
     {children}
   </button>

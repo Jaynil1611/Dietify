@@ -1,3 +1,7 @@
 .cart__checkout {
   text-align: center;
 }
+
+.cart--margin {
+  margin: 3rem 6rem;
+}

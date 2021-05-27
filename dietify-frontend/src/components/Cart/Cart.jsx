@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Cart.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useProduct } from "../../contexts";
 import { handleToast } from "../Toast/Toast";
 import {
@@ -13,7 +13,6 @@ import {
   ProductName,
   PrimaryButton,
   ProductContent,
-  ProductOutOfStock,
   getFilteredList,
 } from "../index";
 import useToastCleaner from "../../utils/useToastCleaner";
@@ -25,13 +24,15 @@ const getTotalPrice = (cartList) => {
   }, 0);
 };
 
-function Cart() {
+function Cart({ loading }) {
   const {
     state: { cartList, wishList },
     dispatch,
   } = useProduct();
   useToastCleaner();
   useDocumentTitle("Cart");
+  const [showLoader, setShowLoader] = useState(false);
+  const navigate = useNavigate();
 
   const incrementQuantity = (product) => {
     updateCartItem(dispatch, {
@@ -55,35 +56,43 @@ function Cart() {
   };
 
   const showConfirmation = () => {
-    handleToast(
-      dispatch,
-      `Your order of Rs. ${getTotalPrice(cartList)} has been placed!`
-    );
+    setShowLoader(true);
+    setTimeout(() => {
+      setShowLoader(false);
+      navigate("/");
+    }, 2000);
+    handleToast(dispatch, `Your order of Rs. ${totalPrice} has been placed!`);
   };
+
+  const filteredCartList = getFilteredList(cartList);
+  const totalPrice = getTotalPrice(filteredCartList);
+  const Loader = <span className="loading"></span>;
 
   return (
     <>
       <div className="h5 text--bold  spacing text--center"> Your Cart </div>
-      {getFilteredList(cartList).length === 0 ? (
+      {filteredCartList.length === 0 && (
         <div className="text--center h6 text--gray">Your cart is empty</div>
+      )}
+      {showLoader && Loader}
+      {loading ? (
+        Loader
       ) : (
         <>
           <div className="cart__checkout">
             <div className="text--center h6 text--bold">
-              Total Checkout Price : {getTotalPrice(cartList)}
+              Total Checkout Price : {totalPrice}
             </div>
             <button
               type="button"
-              className="button button--primary button--sm subtitle--sm"
+              className="button button--primary button--sm subtitle--sm margin--md text--white"
               onClick={showConfirmation}
             >
-              <Link to="/" className="text--white">
-                Place Order
-              </Link>
+              Place Order
             </button>
           </div>
-          <div className="product-showcase">
-            {getFilteredList(cartList).map((product) => {
+          <div className="product-showcase cart--margin">
+            {filteredCartList.map((product) => {
               const {
                 id,
                 name,
@@ -101,7 +110,6 @@ function Cart() {
                   <ProductName name={name} ratings={ratings} />
                   <div className="card__content card__content--align">
                     <ProductContent price={price} brand={brand} offer={offer} />
-                    <ProductOutOfStock inStock={inStock} />
                     <div className="spacing--sm">
                       <PrimaryButton onClick={() => incrementQuantity(product)}>
                         +

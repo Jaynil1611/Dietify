@@ -7,13 +7,11 @@ import {
   ProductName,
   PrimaryButton,
   ProductContent,
-  ProductOutOfStock,
-  getFilteredList,
 } from "../index";
 import useToastCleaner from "../../utils/useToastCleaner";
 import { useDocumentTitle } from "../../utils";
 
-function WishList() {
+function WishList({ loading }) {
   const {
     state: { wishList, cartList },
     dispatch,
@@ -33,21 +31,16 @@ function WishList() {
   return (
     <>
       <div className="h5 text--bold spacing text--center"> Your Wishlist </div>
-      {getFilteredList(wishList).length === 0 ? (
+      {wishList.length === 0 && (
         <div className="text--center h6 text--gray">Your wishlist is empty</div>
+      )}
+      {loading ? (
+        <span className="loading"></span>
       ) : (
-        <div className="product-showcase">
-          {getFilteredList(wishList).map((product) => {
-            const {
-              id,
-              name,
-              image,
-              price,
-              brand,
-              offer,
-              inStock,
-              ratings,
-            } = product;
+        <div className="product-showcase wishlist--margin">
+          {wishList.map((product) => {
+            const { id, name, image, price, brand, offer, inStock, ratings } =
+              product;
             return (
               <div key={id} className="card card--product">
                 <div className={`card__badge badge--position`}>
@@ -60,9 +53,12 @@ function WishList() {
                 <ProductName name={name} ratings={ratings} />
                 <div className="card__content card__content--align">
                   <ProductContent price={price} brand={brand} offer={offer} />
-                  <ProductOutOfStock inStock={inStock} />
-                  <PrimaryButton onClick={() => addItemToCartList(product)}>
-                    Move to Cart
+                  <PrimaryButton
+                    inStock={inStock}
+                    className={inStock ? "" : "out-of-stock"}
+                    onClick={() => addItemToCartList(product)}
+                  >
+                    {inStock ? "Move to Cart" : "Out of Stock"}
                   </PrimaryButton>
                 </div>
               </div>
