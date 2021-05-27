@@ -8,7 +8,7 @@ function Home() {
     <div className="hero">
       <div className="hero__img img--responsive"></div>
       <div className="hero__container">
-        <div className="hero__heading h6 text--center text--bold">
+        <div className="hero__heading h6 text--bold">
           Purchase nutirients rich products personalised for you!
         </div>
         <div className="hero__content text--gray text--center">
@@ -16,11 +16,11 @@ function Home() {
           items.
         </div>
         <div>
-          <PrimaryButton>
-            <Link to="/products" className="text--white button--large">
+          <Link to="/products">
+            <PrimaryButton className="text--white button--large">
               Shop Now
-            </Link>
-          </PrimaryButton>
+            </PrimaryButton>
+          </Link>
         </div>
       </div>
     </div>

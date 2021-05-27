@@ -25,15 +25,6 @@ body {
   background-color: var(--background-color);
 }
 
-.main-content {
-  /* margin-top: 30%; */
-  /* margin-bottom: 2rem; */
-}
-
-.body--spacing {
-  margin: 0.5rem;
-}
-
 .text--white {
   color: var(--text-white);
 }
@@ -48,8 +39,12 @@ body {
   left: 2.6rem;
 }
 
+.main-content {
+  margin-top: 4rem;
+}
+
 @media screen and (min-width: 648px) {
-  .main-content {
-    margin-top: 4rem;
+  .heading__name {
+    margin-left: 1rem;
   }
 }

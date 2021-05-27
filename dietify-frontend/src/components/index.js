@@ -9,7 +9,6 @@ export {
   ProductImage,
   ProductName,
   PrimaryButton,
-  ProductOutOfStock,
   ProductContent,
 } from "./Product/ProductListing";
 export { handleToast } from "./Toast/Toast";

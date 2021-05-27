@@ -1,9 +1,8 @@
 import "./styles.css";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { Cart, Product, Toast, WishList, Home, NotFound } from "./components";
 import { useAxios } from "./server";
 import { useProduct } from "./contexts";
-import { getFilteredList } from "./components";
 import { useDocumentTitle } from "./utils";
 
 export default function App() {
@@ -11,16 +10,16 @@ export default function App() {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
-  const { loadingStatus } = useAxios("products", "productList");
-  useAxios("wishes", "wishList");
-  useAxios("cart", "cartList");
+  const productResponse = useAxios("products", "productList");
+  const wishlistResponse = useAxios("wishes", "wishList");
+  const cartResponse = useAxios("cart", "cartList");
   useDocumentTitle("Home");
 
   return (
-    <div className="body--spacing">
+    <div>
       <div className="heading">
-        <h1>
-          <Link to="/products">Dietify</Link>
+        <h1 className="heading__name">
+          <Link to="/">Dietify</Link>
         </h1>
         <nav>
           <ul className="nav nav--right">
@@ -32,7 +31,7 @@ export default function App() {
               >
                 <i className="fas fa-heart fa-lg">
                   <span className="badge__icon text--white badge__icon badge--overlay">
-                    {getFilteredList(wishList).length}
+                    {wishList.length}
                   </span>
                 </i>
               </Link>
@@ -44,7 +43,7 @@ export default function App() {
               >
                 <i className="fas fa-shopping-cart fa-lg">
                   <span className="badge__icon text--white badge__icon badge--overlay">
-                    {getFilteredList(cartList).length}
+                    {cartList.length}
                   </span>
                 </i>
               </Link>
@@ -54,15 +53,22 @@ export default function App() {
       </div>
       <div className="main-content">
         <Toast />
-        <Switch>
-          <Route exact path="/products">
-            <Product loading={loadingStatus} />
-          </Route>
-          <Route exact path="/wish" component={WishList} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="*" component={NotFound} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route
+            path="/products"
+            element={<Product loading={productResponse.loadingStatus} />}
+          />
+          <Route
+            path="/wish"
+            element={<WishList loading={wishlistResponse.loadingStatus} />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart loading={cartResponse.loadingStatus} />}
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </div>
   );

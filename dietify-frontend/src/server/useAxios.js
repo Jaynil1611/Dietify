@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useProduct } from "../contexts";
 import { callMockServer } from "./index";
 import { actions } from "../reducers";
+import { handleToast } from "../components";
 
 const userId = "6082a6790b7e110cb360760e";
 
@@ -28,6 +29,7 @@ export default function useAxios(resource, name) {
         }
       } catch (error) {
         setError(true);
+        handleToast(dispatch, "Something is wrong, pslease try again later!");
       } finally {
         setLoadingStatus(false);
       }
