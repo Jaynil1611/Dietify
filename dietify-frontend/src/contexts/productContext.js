@@ -1,5 +1,18 @@
-import { createContext, useContext, useReducer } from "react";
-import { productReducer } from "../reducers";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import { handleToast } from "../components";
+import { actions, productReducer } from "../reducers";
+import { callMockServer, constructURL } from "../server";
+import {
+  setupAuthExceptionHandler,
+  setupAuthHeaderForServerCalls,
+} from "../utils";
+import { initialState } from "./initialState";
 
 const ProductContext = createContext();
 
@@ -8,21 +21,49 @@ export const useProduct = () => {
 };
 
 export const ProductProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(productReducer, {
-    productList: [],
-    cartList: [],
-    wishList: [],
-    sortBy: "",
-    showOutOfStock: false,
-    showFastDeliveryOnly: false,
-    search: "",
-    showToast: false,
-    toastMessage: "",
-    priceRange: 1000,
-  });
+  const [state, dispatch] = useReducer(productReducer, initialState);
+  const [token, setToken] = useState(
+    JSON.parse(localStorage.getItem("isUserLoggedIn"))
+  );
+
+  useEffect(() => {
+    setupAuthExceptionHandler(dispatch);
+  }, []);
+
+  const loginUser = async (email, password) => {
+    const { response, error } = await callMockServer({
+      type: "post",
+      url: `${constructURL()}/login`,
+      data: { email, password },
+    });
+    if (!error) {
+      const { firstname, lastname, token: responseToken } = response?.data;
+      setToken(responseToken);
+      setupAuthHeaderForServerCalls(responseToken);
+      localStorage.setItem("isUserLoggedIn", JSON.stringify(responseToken));
+
+      dispatch({
+        type: actions.UPDATE_USER_DETAILS,
+        payload: { firstname, lastname },
+      });
+      handleToast(dispatch, "Login successful");
+      return true;
+    }
+    handleToast(dispatch, "Email or password is incorrect");
+    return false;
+  };
+
+  const logoutUser = () => {
+    setToken(null);
+    setupAuthHeaderForServerCalls(null);
+    localStorage.removeItem("isUserLoggedIn");
+    handleToast(dispatch, "Logout successful");
+  };
 
   return (
-    <ProductContext.Provider value={{ state, dispatch }}>
+    <ProductContext.Provider
+      value={{ state, dispatch, token, loginUser, logoutUser }}
+    >
       {children}
     </ProductContext.Provider>
   );

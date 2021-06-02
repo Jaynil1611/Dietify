@@ -1,5 +1,5 @@
 import { actions } from "./Actions";
-import { appendItem, updateQuantity, removeItem } from "./utils";
+import { appendItem, updateQuantity, removeItem } from "../utils";
 
 const productReducer = (prevState, { type, payload }) => {
   switch (type) {
@@ -78,6 +78,10 @@ const productReducer = (prevState, { type, payload }) => {
         ...prevState,
         priceRange: payload.value,
       };
+    case actions.UPDATE_USER_DETAILS: {
+      const { firstname, lastname } = payload;
+      return { ...prevState, firstname, lastname };
+    }
     default:
       return prevState;
   }

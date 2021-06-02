@@ -3,13 +3,11 @@ import { callMockServer } from ".";
 import { checkItemExist } from "../reducers";
 import { actions } from "../reducers";
 
-const userId = "6082a6790b7e110cb360760e";
-
-const constructURL = () => {
-  return `${process.env.REACT_APP_BACKEND_URL}/user/${userId}`;
+export const constructURL = () => {
+  return `${process.env.REACT_APP_BACKEND_URL}`;
 };
 
-const addOrRemoveFromWish = async (dispatch, product, wishList) => {
+export const addOrRemoveFromWish = async (dispatch, product, wishList) => {
   const itemExists = checkItemExist(wishList, product.id);
   if (itemExists) {
     return removeFromWish(dispatch, product);
@@ -28,7 +26,7 @@ const addOrRemoveFromWish = async (dispatch, product, wishList) => {
   }
 };
 
-const removeFromWish = (dispatch, product) => {
+export const removeFromWish = (dispatch, product) => {
   const { error } = callMockServer({
     type: "delete",
     url: `${constructURL()}/wishes/${product.id}`,
@@ -42,7 +40,7 @@ const removeFromWish = (dispatch, product) => {
   }
 };
 
-const addItemToCart = async (dispatch, product, cartList) => {
+export const addItemToCart = async (dispatch, product, cartList) => {
   const itemExists = checkItemExist(cartList, product.id);
   if (itemExists) {
     return updateCartItem(dispatch, product);
@@ -61,7 +59,7 @@ const addItemToCart = async (dispatch, product, cartList) => {
   } else handleToast(dispatch, "Something is wrong");
 };
 
-const updateCartItem = async (dispatch, product) => {
+export const updateCartItem = async (dispatch, product) => {
   const { response, error } = await callMockServer({
     url: `${constructURL()}/cart/${product.id}`,
     type: "post",
@@ -76,7 +74,7 @@ const updateCartItem = async (dispatch, product) => {
   } else handleToast(dispatch, "Something is wrong");
 };
 
-const removeFromCart = async (dispatch, product) => {
+export const removeFromCart = async (dispatch, product) => {
   const { error } = await callMockServer({
     type: "delete",
     url: `${constructURL()}/cart/${product.id}`,
@@ -90,4 +88,36 @@ const removeFromCart = async (dispatch, product) => {
   } else handleToast(dispatch, "Something is wrong");
 };
 
-export { addItemToCart, addOrRemoveFromWish, removeFromCart, updateCartItem };
+export const signUpUser = async ({
+  dispatch,
+  firstname,
+  lastname,
+  email,
+  password,
+}) => {
+  const { error } = await callMockServer({
+    type: "post",
+    url: `${constructURL()}/users`,
+    data: { firstname, lastname, email, password },
+  });
+  if (!error) {
+    handleToast(dispatch, "Sign up successful");
+    return true;
+  }
+  handleToast(dispatch, "Sign up failed!");
+  return false;
+};
+
+export const getUserDetails = async (dispatch) => {
+  const { response, error } = await callMockServer({
+    type: "get",
+    url: `${constructURL()}/users/user`,
+  });
+  if (!error) {
+    const { firstname, lastname } = response?.data.user;
+    dispatch({
+      type: actions.UPDATE_USER_DETAILS,
+      payload: { firstname, lastname },
+    });
+  }
+};

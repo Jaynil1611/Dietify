@@ -14,3 +14,8 @@ export {
 export { handleToast } from "./Toast/Toast";
 export { closeToast } from "./Toast/Toast";
 export { getFilteredList } from "./Product/Filter";
+export { default as Avatar } from "./Avatar/Avatar";
+export { default as PrivateRoute } from "./PrivateRoute/PrivateRoute";
+export { default as Login } from "./Login/Login";
+export { default as SignUp } from "./Login/SignUp";
+export { default as Logout } from "./Login/Logout";
