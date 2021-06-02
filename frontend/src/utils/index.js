@@ -5,11 +5,11 @@ export {
   getFilteredMenuList,
   checkAuthStatus,
   getFormValues,
+  menuList,
 } from "./loginUtils";
 export {
   setupAuthHeaderForServerCalls,
   setupAuthExceptionHandler,
-  menuList,
 } from "./productUtils";
 export {
   appendItem,

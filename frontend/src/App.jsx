@@ -86,7 +86,11 @@ export default function App() {
         )}
       </div>
       <div className="main-content">
-        <MobileMenu token={token} handleSideMenuClick={handleSideMenuClick} />
+        <MobileMenu
+          token={token}
+          showMenu={showMenu}
+          handleSideMenuClick={handleSideMenuClick}
+        />
         <Toast />
         <Routes>
           <Route path="/" element={<Home />} />

@@ -19,11 +19,3 @@ export const setupAuthExceptionHandler = (dispatch) => {
     }
   );
 };
-
-export const menuList = [
-  { name: "Home", icon: "fa-home-alt", path: "/" },
-  { name: "Products", icon: "fa-list-ul", path: "/products" },
-  { name: "Wishlist", icon: "fa-heart", path: "/wish" },
-  { name: "Cart", icon: "fa-shopping-cart", path: "/cart" },
-  { name: "Login", icon: "fa-sign-in-alt", path: "/login" },
-];
