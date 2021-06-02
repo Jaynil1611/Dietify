@@ -26,7 +26,7 @@ function Product({ loading }) {
     dispatch,
   } = useProduct();
   useToastCleaner();
-  useDocumentTitle("Product");
+  useDocumentTitle("Products");
 
   const [showFilter, setShowFilter] = useState(false);
 
@@ -69,7 +69,7 @@ function Product({ loading }) {
   });
   const priceRangeData = getPriceRangeData({ priceRange, filteredData });
   const searchedData = getSearchedData({ search, priceRangeData });
-  
+
   const filterProps = {
     sortBy: sortBy,
     filterFastDelivery: filterFastDelivery,

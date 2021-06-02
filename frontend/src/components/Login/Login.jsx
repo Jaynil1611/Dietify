@@ -1,13 +1,18 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useProduct } from "../../contexts";
-import { checkEmailAndPassword, getFormValues } from "../../utils";
+import {
+  checkEmailAndPassword,
+  getFormValues,
+  useDocumentTitle,
+} from "../../utils";
 import { handleToast } from "../Toast/Toast";
 import "./Login.css";
 
 function Login() {
   const { loginUser, dispatch } = useProduct();
   const navigate = useNavigate();
+  useDocumentTitle("Login");
 
   const handleUserLogin = async (email, password) => {
     return (await loginUser(email, password)) ? navigate("/") : navigate("");

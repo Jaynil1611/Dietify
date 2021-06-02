@@ -19,3 +19,5 @@ export { default as PrivateRoute } from "./PrivateRoute/PrivateRoute";
 export { default as Login } from "./Login/Login";
 export { default as SignUp } from "./Login/SignUp";
 export { default as Logout } from "./Login/Logout";
+export { default as DesktopMenu } from "./Navbar/DesktopMenu";
+export { default as MobileMenu } from "./Navbar/MobileMenu";

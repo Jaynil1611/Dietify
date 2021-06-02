@@ -2,13 +2,18 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useProduct } from "../../contexts";
 import { signUpUser } from "../../server";
-import { checkEmailAndPassword, getFormValues } from "../../utils";
+import {
+  checkEmailAndPassword,
+  getFormValues,
+  useDocumentTitle,
+} from "../../utils";
 import { handleToast } from "../Toast/Toast";
 import "./Login.css";
 
 function SignUp() {
   const { dispatch } = useProduct();
   const navigate = useNavigate();
+  useDocumentTitle("Sign Up");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

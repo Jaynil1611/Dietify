@@ -2,8 +2,10 @@ import React from "react";
 import { PrimaryButton } from "../index";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import { useDocumentTitle } from "../../utils";
 
 function Home() {
+  useDocumentTitle("Home");
   return (
     <div className="hero">
       <div className="hero__img img--responsive"></div>

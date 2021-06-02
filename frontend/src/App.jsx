@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import { Link, Route, Routes, NavLink } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import {
   Cart,
   Product,
@@ -13,14 +13,12 @@ import {
   Login,
   SignUp,
   Logout,
+  MobileMenu,
+  DesktopMenu,
 } from "./components";
 import { useAxios } from "./server";
 import { useProduct } from "./contexts";
-import {
-  getFilteredMenuList,
-  setupAuthHeaderForServerCalls,
-  useDocumentTitle,
-} from "./utils";
+import { setupAuthHeaderForServerCalls, useDocumentTitle } from "./utils";
 import { useState } from "react";
 
 export default function App() {
@@ -52,23 +50,7 @@ export default function App() {
         <h1 className="heading__name">
           <Link to="/">Dietify</Link>
         </h1>
-        <div className="showNav">
-          <ul className="list--inline li--border flex--row">
-            {getFilteredMenuList(menuList, token).map(({ name, path }) => (
-              <li key={name} className="list__item  li--border spacing--sm">
-                <NavLink
-                  end
-                  onClick={handleSideMenuClick}
-                  to={`${path}`}
-                  className="active"
-                  activeClassName="active"
-                >
-                  <span className="subtitle--sm">{name}</span>
-                </NavLink>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <DesktopMenu token={token} handleSideMenuClick={handleSideMenuClick} />
         {token && (
           <nav className="nav--right">
             <ul className="nav">
@@ -104,30 +86,7 @@ export default function App() {
         )}
       </div>
       <div className="main-content">
-        <div className={`side-bar ${showMenu ? "show" : ""}`}>
-          <div className={`side-menu ${showMenu ? "view" : ""}`}>
-            <ul className="list__group li--border sidebar--scroll">
-              {getFilteredMenuList(menuList, token).map(
-                ({ name, icon, path }) => (
-                  <li key={name} className="list__item li--border spacing--sm">
-                    <NavLink
-                      end
-                      onClick={handleSideMenuClick}
-                      to={`${path}`}
-                      className="active"
-                      activeClassName="active"
-                    >
-                      <span className="padding--right-md">
-                        <i className={`fas ${icon} icon--md`}></i>
-                      </span>
-                      <span className="subtitle--sm">{name}</span>
-                    </NavLink>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        </div>
+        <MobileMenu token={token} handleSideMenuClick={handleSideMenuClick} />
         <Toast />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -152,11 +111,3 @@ export default function App() {
     </div>
   );
 }
-
-const menuList = [
-  { name: "Home", icon: "fa-home-alt", path: "/" },
-  { name: "Products", icon: "fa-list-ul", path: "/products" },
-  { name: "Wishlist", icon: "fa-heart", path: "/wish" },
-  { name: "Cart", icon: "fa-shopping-cart", path: "/cart" },
-  { name: "Login", icon: "fa-sign-in-alt", path: "/login" },
-];
