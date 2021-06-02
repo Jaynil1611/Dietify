@@ -1,10 +1,13 @@
 const { Cart } = require("../models/cart.model");
 const { extend } = require("lodash");
-const { getNormalizedList, getNormalizedProduct } = require("../utils");
+const {
+  getNormalizedList,
+  getNormalizedProduct,
+} = require("../utils/normalizeData");
 
 const getCartList = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req;
     const userCartProducts = await Cart.find({ userId }).populate("productId");
     const normalizedCart = getNormalizedList(userCartProducts);
     res.status(200).json({ success: true, cart: normalizedCart });
@@ -15,7 +18,7 @@ const getCartList = async (req, res) => {
 
 const postCartList = async (req, res) => {
   let newProduct = req.body;
-  const { userId } = req.params;
+  const { userId } = req;
   const { id: productId } = newProduct;
   newProduct = { productId, userId, ...newProduct };
   newProduct = new Cart(newProduct);

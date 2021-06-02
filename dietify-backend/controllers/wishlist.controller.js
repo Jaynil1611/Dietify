@@ -1,10 +1,13 @@
 const { Wishlist } = require("../models/wishlist.model");
 const { extend } = require("lodash");
-const { getNormalizedList, getNormalizedProduct } = require("../utils");
+const {
+  getNormalizedList,
+  getNormalizedProduct,
+} = require("../utils/normalizeData");
 
 const getWishlist = async (req, res) => {
   try {
-    const { userId } = req.params;
+    const { userId } = req;
     const userWishProducts = await Wishlist.find({ userId }).populate(
       "productId"
     );
@@ -17,7 +20,7 @@ const getWishlist = async (req, res) => {
 
 const postWishlist = async (req, res) => {
   let newProduct = req.body;
-  const { userId } = req.params;
+  const { userId } = req;
   const { id: productId } = newProduct;
 
   newProduct = { productId, userId, ...newProduct };

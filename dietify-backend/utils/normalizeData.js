@@ -26,3 +26,5 @@ module.exports = {
   getNormalizedProduct,
   getNormalizedProductList,
 };
+
+// userId ---> 6082a6790b7e110cb360760e
