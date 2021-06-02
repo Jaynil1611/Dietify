@@ -53,6 +53,10 @@ body {
   margin-left: 2.5rem;
 }
 
+.main-content {
+  margin-top: 5rem;
+}
+
 .side-bar {
   visibility: hidden;
   position: fixed;

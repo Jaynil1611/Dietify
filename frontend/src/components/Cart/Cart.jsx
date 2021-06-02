@@ -56,6 +56,7 @@ function Cart({ loading }) {
   };
 
   const showConfirmation = () => {
+    if (totalPrice <= 0) return handleToast(dispatch, "Your cart is empty!");
     setShowLoader(true);
     setTimeout(() => {
       setShowLoader(false);
