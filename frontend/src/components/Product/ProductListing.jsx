@@ -70,7 +70,7 @@ const ProductListing = ({ productList }) => {
 
 export const ProductName = ({ name, ratings }) => (
   <div className="card__heading name--align text--bold">
-    <span>{name}</span>
+    <span className="name--wrap">{name}</span>
     <div className="rating--align text--white body--md">
       {ratings}
       <i className="fas fa-star fa-xs rating__icon"></i>
@@ -80,7 +80,7 @@ export const ProductName = ({ name, ratings }) => (
 
 export const ProductImage = ({ image, inStock }) => (
   <img
-    className={`img--responsive ${inStock ? "" : "img--gray"}`}
+    className={`img--height ${inStock ? "" : "img--gray"}`}
     src={image}
     alt=""
   />
@@ -90,7 +90,7 @@ export const ProductContent = ({ brand, offer, price }) => (
   <>
     <p className="subtitle--sm spacing--horiz spacing--p">{brand}</p>
     <p className="spacing--horiz spacing--p">
-      <span className="subtitle--md text--bold ">Rs.{price}</span>
+      <span className="subtitle--md text--bold">Rs.{price}</span>
       <span className="text--primary body--md"> {offer} </span>
     </p>
   </>

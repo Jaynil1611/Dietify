@@ -8,7 +8,7 @@ export const initialState = {
   search: "",
   showToast: false,
   toastMessage: "",
-  priceRange: 1000,
+  priceRange: 10000,
   firstname: "",
   lastname: "",
 };
