@@ -8,7 +8,9 @@ const {
 const getCartList = async (req, res) => {
   try {
     const { userId } = req;
-    const userCartProducts = await Cart.find({ userId }).populate("productId");
+    const userCartProducts = await Cart.find({ userId })
+      .populate("productId")
+      .select("-__v");
     const normalizedCart = getNormalizedList(userCartProducts);
     res.status(200).json({ success: true, cart: normalizedCart });
   } catch (error) {
