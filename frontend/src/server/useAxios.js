@@ -36,7 +36,7 @@ export default function useAxios(resource, name, isAuthRequired) {
         }
       })();
     }
-  }, []);
+  }, [token, isAuthRequired, dispatch]);
 
   return { loadingStatus, error };
 }

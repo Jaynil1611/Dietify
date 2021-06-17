@@ -1,7 +1,7 @@
 import React from "react";
 import "./WishList.css";
 import { useProduct } from "../../contexts";
-import { addItemToCart, addOrRemoveFromWish } from "../../server";
+import { addItemToCart, removeFromWish } from "../../server";
 import {
   ProductImage,
   ProductName,
@@ -20,12 +20,12 @@ function WishList({ loading }) {
   useDocumentTitle("Wishlist");
 
   const addItemToCartList = (product) => {
-    removeFromWishList(product);
+    removeFromWish(dispatch, product);
     addItemToCart(dispatch, product, cartList);
   };
 
   const removeFromWishList = (product) => {
-    addOrRemoveFromWish(dispatch, product, wishList);
+    removeFromWish(dispatch, product);
   };
 
   return (

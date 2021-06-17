@@ -5,6 +5,7 @@ import React, {
   useReducer,
   useState,
 } from "react";
+import { useNavigate } from "react-router";
 import { handleToast } from "../components";
 import { actions, productReducer } from "../reducers";
 import { callMockServer, constructURL } from "../server";
@@ -21,6 +22,7 @@ export const useProduct = () => {
 };
 
 export const ProductProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [state, dispatch] = useReducer(productReducer, initialState);
   const [token, setToken] = useState(
     JSON.parse(localStorage.getItem("isUserLoggedIn"))
@@ -56,8 +58,10 @@ export const ProductProvider = ({ children }) => {
   const logoutUser = () => {
     setToken(null);
     setupAuthHeaderForServerCalls(null);
+    dispatch({ type: actions.RESET_STATE });
     localStorage.removeItem("isUserLoggedIn");
     handleToast(dispatch, "Logout successful");
+    navigate("/");
   };
 
   return (

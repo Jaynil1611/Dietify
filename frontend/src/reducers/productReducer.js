@@ -1,5 +1,6 @@
 import { actions } from "./Actions";
 import { appendItem, updateQuantity, removeItem } from "../utils";
+import { initialState } from "../contexts";
 
 const productReducer = (prevState, { type, payload }) => {
   switch (type) {
@@ -81,6 +82,12 @@ const productReducer = (prevState, { type, payload }) => {
     case actions.UPDATE_USER_DETAILS: {
       const { firstname, lastname } = payload;
       return { ...prevState, firstname, lastname };
+    }
+    case actions.RESET_STATE: {
+      return {
+        ...prevState,
+        ...initialState,
+      };
     }
     default:
       return prevState;

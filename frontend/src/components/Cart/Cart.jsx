@@ -18,6 +18,16 @@ import {
 import useToastCleaner from "../../utils/useToastCleaner";
 import { useDocumentTitle } from "../../utils";
 
+const constructCartURL = (cartList) => {
+  let urlParams = "";
+  cartList.forEach(({ asinId, cartQuantity }, index) => {
+    urlParams = urlParams.concat(
+      `ASIN.${index}=${asinId}&Quantity.${index}=${cartQuantity}&`
+    );
+  });
+  return `https://www.amazon.in/gp/aws/cart/add.html?${urlParams}`;
+};
+
 const getTotalPrice = (cartList) => {
   return cartList.reduce((totalPrice, { price, cartQuantity }) => {
     return totalPrice + price * cartQuantity;
@@ -60,9 +70,12 @@ function Cart({ loading }) {
     setShowLoader(true);
     setTimeout(() => {
       setShowLoader(false);
-      navigate("/");
+      window.open(constructCartURL(cartList), "_blank");
     }, 2000);
-    handleToast(dispatch, `Your order of Rs. ${totalPrice} has been placed!`);
+    handleToast(
+      dispatch,
+      `You are being redirected to Amazon's Cart to complete your order!`
+    );
   };
 
   const filteredCartList = getFilteredList(cartList);

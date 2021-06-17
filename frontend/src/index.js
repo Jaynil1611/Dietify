@@ -8,11 +8,11 @@ import { ProductProvider } from "./contexts";
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   <StrictMode>
-    <ProductProvider>
-      <Router>
+    <Router>
+      <ProductProvider>
         <App />
-      </Router>
-    </ProductProvider>
+      </ProductProvider>
+    </Router>
   </StrictMode>,
   rootElement
 );
