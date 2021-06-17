@@ -1,3 +1,6 @@
+const { productList } = require("../models/product.data");
+const { Product } = require("../models/product.model");
+
 async function storeProducts() {
   try {
     productList.forEach(async (product) => {
