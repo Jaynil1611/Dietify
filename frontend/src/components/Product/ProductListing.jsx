@@ -80,6 +80,7 @@ export const ProductName = ({ name, ratings }) => (
 
 export const ProductImage = ({ image, inStock }) => (
   <img
+    loading="lazy"
     className={`img--height ${inStock ? "" : "img--gray"}`}
     src={image}
     alt=""

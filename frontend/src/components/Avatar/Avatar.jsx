@@ -23,6 +23,7 @@ function Avatar() {
         <div>
           <div onClick={handleShowMenu} className="nav--link text--gray">
             <img
+              loading="lazy"
               className="img--xs"
               src={`https://ui-avatars.com/api/?name=${firstname}+${lastname}&rounded=true&background=fd7014&color=fff&size=32`}
               alt=""
