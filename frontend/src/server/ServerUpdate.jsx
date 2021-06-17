@@ -60,10 +60,11 @@ export const addItemToCart = async (dispatch, product, cartList) => {
 };
 
 export const updateCartItem = async (dispatch, product) => {
+  const { id, cartQuantity } = product;
   const { response, error } = await callMockServer({
-    url: `${constructURL()}/cart/${product.id}`,
+    url: `${constructURL()}/cart/${id}`,
     type: "post",
-    data: product,
+    data: { cartQuantity },
   });
   if (!error) {
     handleToast(dispatch, "Product Quantity Updated");
