@@ -10,8 +10,6 @@ const getNormalizedProduct = ({ productId, cartQuantity, status }) => {
     cartQuantity,
     status,
     ...productId._doc,
-    _id: undefined,
-    __v: undefined,
   };
 };
 

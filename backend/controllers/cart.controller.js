@@ -19,18 +19,12 @@ const getCartList = async (req, res) => {
 const postCartList = async (req, res) => {
   let newProduct = req.body;
   const { userId } = req;
-  const { id: productId } = newProduct;
-  newProduct = { productId, userId, ...newProduct };
-  newProduct = new Cart(newProduct);
-
+  newProduct = { productId: newProduct.id, userId, ...newProduct };
+  let updatedProduct = new Cart(newProduct);
   try {
-    await newProduct.save();
-    let updatedProduct = await Cart.findOne({ userId, productId }).populate(
-      "productId"
-    );
-    updatedProduct = getNormalizedProduct(updatedProduct);
-
-    res.status(201).json({ success: true, cart: updatedProduct });
+    updatedProduct = await updatedProduct.save();
+    const cart = extend(updatedProduct._doc, newProduct);
+    res.status(201).json({ success: true, cart });
   } catch (error) {
     res.status(500).json({ success: false, errorMessage: error.message });
   }

@@ -8,9 +8,9 @@ const {
 const getWishlist = async (req, res) => {
   try {
     const { userId } = req;
-    const userWishProducts = await Wishlist.find({ userId }).populate(
-      "productId"
-    );
+    const userWishProducts = await Wishlist.find({ userId })
+      .populate("productId")
+      .select("-__v");
     const normalizedCart = getNormalizedList(userWishProducts);
     res.status(200).json({ success: true, wishes: normalizedCart });
   } catch (error) {
@@ -21,20 +21,12 @@ const getWishlist = async (req, res) => {
 const postWishlist = async (req, res) => {
   let newProduct = req.body;
   const { userId } = req;
-  const { id: productId } = newProduct;
-
-  newProduct = { productId, userId, ...newProduct };
-  newProduct = new Wishlist(newProduct);
-
+  newProduct = { productId: newProduct.id, userId, ...newProduct };
+  let updatedProduct = new Wishlist(newProduct);
   try {
-    await newProduct.save();
-    let updatedProduct = await Wishlist.findOne({
-      userId,
-      productId,
-    }).populate("productId");
-
-    updatedProduct = getNormalizedProduct(updatedProduct);
-    return res.status(201).json({ success: true, wish: updatedProduct });
+    updatedProduct = await updatedProduct.save();
+    const wish = extend(updatedProduct._doc, newProduct);
+    return res.status(201).json({ success: true, wish });
   } catch (error) {
     res.status(500).json({ success: false, errorMessage: error.message });
   }
