@@ -19,3 +19,11 @@ export const setupAuthExceptionHandler = (dispatch) => {
     }
   );
 };
+
+export const getTotalPrice = (cartList) => {
+  return cartList.reduce((totalPrice, { price, cartQuantity }) => {
+    return totalPrice + price * cartQuantity;
+  }, 0);
+};
+
+export const convertToRupee = (number) => number.toLocaleString("en-IN");

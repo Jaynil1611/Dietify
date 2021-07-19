@@ -1,4 +1,4 @@
-export { default as useToastCleaner } from "./useToastCleaner";
+export { default as useCleaner } from "./useCleaner";
 export { default as useDocumentTitle } from "./useDocumenTitle";
 export {
   checkEmailAndPassword,
@@ -10,6 +10,8 @@ export {
 export {
   setupAuthHeaderForServerCalls,
   setupAuthExceptionHandler,
+  getTotalPrice,
+  convertToRupee,
 } from "./productUtils";
 export {
   appendItem,
