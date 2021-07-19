@@ -1,4 +1,4 @@
-const { productList } = require("../models/product.data");
+const { productList } = require("./product.data");
 const { Product } = require("../models/product.model");
 
 async function storeProducts() {
