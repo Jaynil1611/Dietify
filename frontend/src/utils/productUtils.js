@@ -26,4 +26,5 @@ export const getTotalPrice = (cartList) => {
   }, 0);
 };
 
-export const convertToRupee = (number) => number.toLocaleString("en-IN");
+export const convertToRupee = (number) =>
+  Number(number).toLocaleString("en-IN");

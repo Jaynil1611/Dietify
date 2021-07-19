@@ -3,6 +3,7 @@ import { checkItemExist } from "../../reducers";
 import { Link } from "react-router-dom";
 import { addOrRemoveFromWish, addItemToCart } from "../../server";
 import "./ProductListing.css";
+import { convertToRupee } from "../../utils";
 
 const ProductListing = ({ productList }) => {
   const {
@@ -91,7 +92,7 @@ export const ProductContent = ({ brand, offer, price }) => (
   <>
     <p className="subtitle--sm spacing--horiz spacing--p">{brand}</p>
     <p className="spacing--horiz spacing--p">
-      <span className="subtitle--md text--bold">Rs.{price}</span>
+      <span className="subtitle--md text--bold">₹{convertToRupee(price)}</span>
       <span className="text--primary body--md"> {offer} </span>
     </p>
   </>
