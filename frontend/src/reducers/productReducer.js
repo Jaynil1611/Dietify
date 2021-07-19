@@ -54,6 +54,11 @@ const productReducer = (prevState, { type, payload }) => {
         ...prevState,
         showFastDeliveryOnly: !prevState.showFastDeliveryOnly,
       };
+    case actions.CLEAR_USER_CART:
+      return {
+        ...prevState,
+        cartList: [],
+      };
     case actions.CLEAR_ALL_FILTERS:
       return {
         ...prevState,

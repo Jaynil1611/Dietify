@@ -42,9 +42,7 @@ export const removeFromWish = (dispatch, product) => {
 
 export const addItemToCart = async (dispatch, product, cartList) => {
   const itemExists = checkItemExist(cartList, product.id);
-  if (itemExists) {
-    return updateCartItem(dispatch, product);
-  }
+  if (itemExists) return;
   const { response, error } = await callMockServer({
     type: "post",
     url: `${constructURL()}/cart`,
@@ -53,7 +51,7 @@ export const addItemToCart = async (dispatch, product, cartList) => {
   if (!error) {
     handleToast(dispatch, "Cart Updated");
     dispatch({
-      type: itemExists ? actions.REMOVE_FROM_CART : actions.ADD_ITEM_TO_CART,
+      type: actions.ADD_ITEM_TO_CART,
       payload: response.data.cart,
     });
   } else handleToast(dispatch, "Something is wrong");
@@ -119,6 +117,18 @@ export const getUserDetails = async (dispatch) => {
     dispatch({
       type: actions.UPDATE_USER_DETAILS,
       payload: { firstname, lastname },
+    });
+  }
+};
+
+export const clearCart = async (dispatch) => {
+  const { error } = await callMockServer({
+    type: "delete",
+    url: `${constructURL()}/cart`,
+  });
+  if (!error) {
+    dispatch({
+      type: actions.CLEAR_USER_CART,
     });
   }
 };

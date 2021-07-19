@@ -8,7 +8,6 @@ import {
   PrimaryButton,
   ProductContent,
 } from "../index";
-import useToastCleaner from "../../utils/useToastCleaner";
 import { useDocumentTitle } from "../../utils";
 
 function WishList({ loading }) {
@@ -16,7 +15,7 @@ function WishList({ loading }) {
     state: { wishList, cartList },
     dispatch,
   } = useProduct();
-  useToastCleaner();
+
   useDocumentTitle("Wishlist");
 
   const addItemToCartList = (product) => {
@@ -30,9 +29,9 @@ function WishList({ loading }) {
 
   return (
     <>
-      <div className="h5 text--bold spacing text--center"> Your Wishlist </div>
+      <div className="h5 text--bold spacing text--center"> My Wishlist </div>
       {wishList.length === 0 && (
-        <div className="text--center h6 text--gray">Your wishlist is empty</div>
+        <div className="text--center h6 text--gray">Wishlist is empty</div>
       )}
       {loading ? (
         <span className="loading"></span>
