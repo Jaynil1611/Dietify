@@ -7,13 +7,14 @@ const {
   getCartItem,
   updateCartItem,
   deleteCartItem,
+  clearCart,
 } = require("../controllers/cart.controller");
-
 
 router
   .route("/")
   .get(getCartList)
-  .post(postCartList);
+  .post(postCartList)
+  .delete(clearCart);
 
 router.param("productId", cartParamHandler);
 
