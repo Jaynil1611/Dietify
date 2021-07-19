@@ -21,3 +21,4 @@ export { default as SignUp } from "./Login/SignUp";
 export { default as Logout } from "./Login/Logout";
 export { default as DesktopMenu } from "./Navbar/DesktopMenu";
 export { default as MobileMenu } from "./Navbar/MobileMenu";
+export { default as Header } from "./Navbar/Header";
