@@ -15,7 +15,6 @@ import {
   Header,
 } from "./components";
 import { useAxios } from "./server";
-import { useProduct } from "./contexts";
 import {
   setupAuthHeaderForServerCalls,
   useCleaner,
@@ -26,9 +25,6 @@ import { useState } from "react";
 export default function App() {
   const token = JSON.parse(localStorage.getItem("isUserLoggedIn"));
   setupAuthHeaderForServerCalls(token);
-  const {
-    state: { wishList, cartList },
-  } = useProduct();
   const productResponse = useAxios("products", "productList", false);
   const wishlistResponse = useAxios("wishes", "wishList");
   const cartResponse = useAxios("cart", "cartList");
