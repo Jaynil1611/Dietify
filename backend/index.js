@@ -13,6 +13,7 @@ const wishlistRouter = require("./routes/wishlist.router");
 const userRouter = require("./routes/user.router");
 const createUserRouter = require("./routes/createUser.router");
 const loginRouter = require("./routes/login.router");
+const paymentRouter = require("./routes/payment.router");
 
 const { pathNotFoundHandler } = require("./middlewares/pathNotFoundHandler");
 const { errorHandler } = require("./middlewares/errorHandler");
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 app.use("/products", productRouter);
 app.use("/login", loginRouter);
 app.use("/users", createUserRouter);
+app.use("/payment", paymentRouter);
 
 app.use(authHandler);
 
