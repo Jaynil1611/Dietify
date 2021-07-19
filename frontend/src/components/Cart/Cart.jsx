@@ -53,9 +53,6 @@ function Cart({ loading }) {
   return (
     <>
       <div className="h5 text--bold spacing text--center">My Cart</div>
-      {filteredCartList.length === 0 && (
-        <div className="text--center h6 text--gray">Cart is empty</div>
-      )}
       {showLoader && Loader}
       {loading ? (
         Loader
@@ -64,6 +61,9 @@ function Cart({ loading }) {
           <div className="container">
             {filteredCartList.length > 0 && (
               <Checkout setShowLoader={setShowLoader} />
+            )}
+            {filteredCartList.length === 0 && (
+              <div className="text--center h6 text--gray">Cart is empty</div>
             )}
             <div>
               <div className="product-showcase payment__details">
