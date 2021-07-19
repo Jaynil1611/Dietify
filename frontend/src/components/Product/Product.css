@@ -78,11 +78,12 @@
   background-color: var(--light-color);
   position: fixed;
   z-index: 4;
-  top: 3.5rem;
+  top: 2rem;
   padding: 1rem 0.5rem;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   bottom: 0;
+  overflow: hidden;
 }
 
 .button--outline {

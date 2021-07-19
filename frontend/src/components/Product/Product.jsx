@@ -10,7 +10,6 @@ import {
 } from "./Filter";
 import { PrimaryButton } from "./ProductListing";
 import "./Product.css";
-import useToastCleaner from "../../utils/useToastCleaner";
 import { useDocumentTitle } from "../../utils";
 
 function Product({ loading }) {
@@ -25,7 +24,6 @@ function Product({ loading }) {
     },
     dispatch,
   } = useProduct();
-  useToastCleaner();
   useDocumentTitle("Products");
 
   const [showFilter, setShowFilter] = useState(false);
@@ -164,7 +162,7 @@ const FilterSection = ({
       <legend> Price Sort by </legend>
       <div>
         <input
-          onChange={sortPriceLowToHigh}
+          onChange={sortPriceLowToHigh} 
           checked={sortBy && sortBy === actions.PRICE_LOW_TO_HIGH}
           type="radio"
           name="sort"

@@ -110,6 +110,10 @@
   padding: 0.5rem;
 }
 
+.button--width {
+  max-width: max-content;
+}
+
 @media screen and (min-width: 648px) {
   .login__box {
     width: 40%;

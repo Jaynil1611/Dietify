@@ -18,7 +18,11 @@ import {
 } from "./components";
 import { useAxios } from "./server";
 import { useProduct } from "./contexts";
-import { setupAuthHeaderForServerCalls, useDocumentTitle } from "./utils";
+import {
+  setupAuthHeaderForServerCalls,
+  useCleaner,
+  useDocumentTitle,
+} from "./utils";
 import { useState } from "react";
 
 export default function App() {
@@ -30,8 +34,9 @@ export default function App() {
   const productResponse = useAxios("products", "productList", false);
   const wishlistResponse = useAxios("wishes", "wishList");
   const cartResponse = useAxios("cart", "cartList");
-  useDocumentTitle("Home");
   const [showMenu, setShowMenu] = useState(false);
+  useDocumentTitle("Home");
+  useCleaner();
 
   const handleSideMenuClick = () => {
     setShowMenu(!showMenu);
