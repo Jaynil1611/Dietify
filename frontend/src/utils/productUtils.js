@@ -30,8 +30,8 @@ export const convertToRupee = (number) =>
   Number(number).toLocaleString("en-IN");
 
 export const getProductBrands = (productList) => {
-  return productList.reduce((result, { brand }) => {
-    if (brand && !result.includes(brand)) {
+  return productList.reduce((result, { brand, inStock }) => {
+    if (brand && inStock && !result.includes(brand)) {
       result.push(brand);
     }
     return result;

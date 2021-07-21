@@ -1,10 +1,13 @@
 import React from "react";
+import { actions } from "../../reducers";
 import { checkBrandExists } from "../../utils";
 
 const FilterSection = ({
   sortPriceLowToHigh,
   sortPriceHighToLow,
   sortBy,
+  showOutOfStock,
+  showFastDeliveryOnly,
   filterOutOfStock,
   filterFastDelivery,
   handleSliderChange,
@@ -42,12 +45,18 @@ const FilterSection = ({
     <fieldset className="fieldset--style spacing--vh">
       <legend className="text--bold"> Availability </legend>
       <div className="product__brand">
-        <input id="out_of_stock" onChange={filterOutOfStock} type="checkbox" />
+        <input
+          id="out_of_stock"
+          checked={showOutOfStock}
+          onChange={filterOutOfStock}
+          type="checkbox"
+        />
         <label htmlFor="out_of_stock"> Include Out of Stock </label>
       </div>
       <div className="product__brand">
         <input
           id="fast_delivery"
+          checked={showFastDeliveryOnly}
           onChange={filterFastDelivery}
           type="checkbox"
         />

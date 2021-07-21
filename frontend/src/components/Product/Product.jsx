@@ -86,6 +86,8 @@ function Product({ loading }) {
     sortPriceHighToLow,
     sortPriceLowToHigh,
     handleSliderChange,
+    showOutOfStock,
+    showFastDeliveryOnly,
     priceRange,
     brands,
     selectedBrands,
@@ -133,18 +135,15 @@ function Product({ loading }) {
             <ProductListing productList={searchedData} />
           ) : (
             <div className="product__search">
-              {search && (
-                <div className="h6 text--center">
+              {search ? (
+                <div className="h6">
                   No items found for
                   <i>
                     <b>{search}</b>
                   </i>
                 </div>
-              )}
-              {!loading && priceRangeData.length === 0 && (
-                <div className="h6 text--center">
-                  No items found with price <b>₹{convertToRupee(priceRange)}</b>
-                </div>
+              ) : (
+                <>{!loading && <div className="h6">No items found</div>}</>
               )}
             </div>
           )}
