@@ -28,3 +28,16 @@ export const getTotalPrice = (cartList) => {
 
 export const convertToRupee = (number) =>
   Number(number).toLocaleString("en-IN");
+
+export const getProductBrands = (productList) => {
+  return productList.reduce((result, { brand }) => {
+    if (brand && !result.includes(brand)) {
+      result.push(brand);
+    }
+    return result;
+  }, []);
+};
+
+export const checkBrandExists = (list, brand) => {
+  return list.includes(brand);
+};

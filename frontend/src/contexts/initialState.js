@@ -8,6 +8,8 @@ export const initialState = {
   search: "",
   showToast: false,
   toastMessage: "",
+  selectedBrands: [],
+  brands: [],
   priceRange: 10000,
   firstname: "",
   lastname: "",

@@ -1,5 +1,11 @@
 import { actions } from "./Actions";
-import { appendItem, updateQuantity, removeItem } from "../utils";
+import {
+  appendItem,
+  updateQuantity,
+  removeItem,
+  getProductBrands,
+  addOrRemoveBrand,
+} from "../utils";
 import { initialState } from "../contexts";
 
 const productReducer = (prevState, { type, payload }) => {
@@ -66,7 +72,8 @@ const productReducer = (prevState, { type, payload }) => {
         search: "",
         showOutOfStock: false,
         showFastDeliveryOnly: false,
-        priceRange: 1000,
+        priceRange: 1200,
+        selectedBrands: [],
       };
     case actions.UPDATE_SEARCH_TEXT:
       return {
@@ -87,6 +94,21 @@ const productReducer = (prevState, { type, payload }) => {
     case actions.UPDATE_USER_DETAILS: {
       const { firstname, lastname } = payload;
       return { ...prevState, firstname, lastname };
+    }
+    case actions.INITIALIZE_BRANDS: {
+      return {
+        ...prevState,
+        brands: getProductBrands(prevState.productList),
+      };
+    }
+    case actions.UPDATE_BRAND_FILTER: {
+      return {
+        ...prevState,
+        selectedBrands: addOrRemoveBrand(
+          prevState.selectedBrands,
+          payload.brand
+        ),
+      };
     }
     case actions.RESET_STATE: {
       return {

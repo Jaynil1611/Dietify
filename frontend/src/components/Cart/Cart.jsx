@@ -91,12 +91,6 @@ function Cart({ loading }) {
                         />
                         <div className="spacing--sm">
                           <PrimaryButton
-                            onClick={() => incrementQuantity(product)}
-                          >
-                            +
-                          </PrimaryButton>
-                          <span className="spacing--horiz">{cartQuantity}</span>
-                          <PrimaryButton
                             onClick={() =>
                               decrementQuantity(product, cartQuantity)
                             }
@@ -106,6 +100,12 @@ function Cart({ loading }) {
                             ) : (
                               "-"
                             )}
+                          </PrimaryButton>
+                          <span className="spacing--horiz">{cartQuantity}</span>
+                          <PrimaryButton
+                            onClick={() => incrementQuantity(product)}
+                          >
+                            +
                           </PrimaryButton>
                         </div>
                         <PrimaryButton

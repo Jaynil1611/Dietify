@@ -20,7 +20,9 @@ import {
   useCleaner,
   useDocumentTitle,
 } from "./utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { actions } from "./reducers";
+import { useProduct } from "./contexts";
 
 export default function App() {
   const token = JSON.parse(localStorage.getItem("isUserLoggedIn"));
@@ -28,9 +30,17 @@ export default function App() {
   const productResponse = useAxios("products", "productList", false);
   const wishlistResponse = useAxios("wishes", "wishList");
   const cartResponse = useAxios("cart", "cartList");
+  const {
+    state: { productList },
+    dispatch,
+  } = useProduct();
   const [showMenu, setShowMenu] = useState(false);
   useDocumentTitle("Home");
   useCleaner();
+
+  useEffect(() => {
+    if (productList.length) dispatch({ type: actions.INITIALIZE_BRANDS });
+  }, [productList.length]);
 
   const handleSideMenuClick = () => {
     setShowMenu(!showMenu);

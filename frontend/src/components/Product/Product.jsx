@@ -7,10 +7,12 @@ import {
   getSearchedData,
   getSortedData,
   getPriceRangeData,
+  getFilteredBrandData,
 } from "./Filter";
 import { PrimaryButton } from "./ProductListing";
 import "./Product.css";
-import { useDocumentTitle } from "../../utils";
+import { convertToRupee, useDocumentTitle } from "../../utils";
+import FilterSection, { FilterOptions } from "./FilterSection";
 
 function Product({ loading }) {
   const {
@@ -21,11 +23,12 @@ function Product({ loading }) {
       productList,
       search,
       priceRange,
+      selectedBrands,
+      brands,
     },
     dispatch,
   } = useProduct();
   useDocumentTitle("Products");
-
   const [showFilter, setShowFilter] = useState(false);
 
   const sortPriceLowToHigh = () => {
@@ -59,23 +62,34 @@ function Product({ loading }) {
     });
   };
 
-  const sortedData = getSortedData({ sortBy, productList });
+  const updateBrandFilter = (e) => {
+    dispatch({
+      type: actions.UPDATE_BRAND_FILTER,
+      payload: { brand: e.target.labels[0].htmlFor },
+    });
+  };
+
+  const sortedData = getSortedData(sortBy, productList);
   const filteredData = getFilteredData({
     showOutOfStock,
     showFastDeliveryOnly,
     sortedData,
   });
-  const priceRangeData = getPriceRangeData({ priceRange, filteredData });
-  const searchedData = getSearchedData({ search, priceRangeData });
+  const selectedBrandData = getFilteredBrandData(selectedBrands, filteredData);
+  const priceRangeData = getPriceRangeData(priceRange, selectedBrandData);
+  const searchedData = getSearchedData(search, priceRangeData);
 
   const filterProps = {
-    sortBy: sortBy,
-    filterFastDelivery: filterFastDelivery,
-    filterOutOfStock: filterOutOfStock,
-    sortPriceHighToLow: sortPriceHighToLow,
-    sortPriceLowToHigh: sortPriceLowToHigh,
-    handleSliderChange: handleSliderChange,
-    priceRange: priceRange,
+    sortBy,
+    filterFastDelivery,
+    filterOutOfStock,
+    sortPriceHighToLow,
+    sortPriceLowToHigh,
+    handleSliderChange,
+    priceRange,
+    brands,
+    selectedBrands,
+    updateBrandFilter,
   };
 
   return (
@@ -114,101 +128,31 @@ function Product({ loading }) {
           </SecondaryButton>
           <PrimaryButton onClick={clearAllFilters}>Clear All</PrimaryButton>
         </div>
-        <div>
+        <div className="product__search">
           {searchedData.length > 0 ? (
             <ProductListing productList={searchedData} />
           ) : (
-            search && (
-              <span className="h6 text--center">
-                No items found with {search}
-              </span>
-            )
+            <div className="product__search">
+              {search && (
+                <div className="h6 text--center">
+                  No items found for
+                  <i>
+                    <b>{search}</b>
+                  </i>
+                </div>
+              )}
+              {!loading && priceRangeData.length === 0 && (
+                <div className="h6 text--center">
+                  No items found with price <b>₹{convertToRupee(priceRange)}</b>
+                </div>
+              )}
+            </div>
           )}
         </div>
       </div>
     </div>
   );
 }
-
-const FilterOptions = ({ searchProduct, searchedData }) => (
-  <div className="filter-options">
-    <div className="input__search">
-      <i className="fas fa-search fa-lg search__icon"></i>
-      <input
-        type="text"
-        className="input search-bar"
-        onChange={(e) => searchProduct(e.target.value)}
-        placeholder="Search products"
-      />
-      <div className="text--secondary margin--sm text--center">
-        {searchedData.length} Products
-      </div>
-    </div>
-  </div>
-);
-
-const FilterSection = ({
-  sortPriceLowToHigh,
-  sortPriceHighToLow,
-  sortBy,
-  filterOutOfStock,
-  filterFastDelivery,
-  handleSliderChange,
-  priceRange,
-}) => (
-  <div className="filter__section">
-    <hr className="filter__divider"></hr>
-    <fieldset className="fieldset--style spacing--vh">
-      <legend> Price Sort by </legend>
-      <div>
-        <input
-          onChange={sortPriceLowToHigh} 
-          checked={sortBy && sortBy === actions.PRICE_LOW_TO_HIGH}
-          type="radio"
-          name="sort"
-        />
-        <label> Low to High </label>
-      </div>
-      <div>
-        <input
-          onChange={sortPriceHighToLow}
-          type="radio"
-          name="sort"
-          checked={sortBy && sortBy === actions.PRICE_HIGH_TO_LOW}
-        />
-        <label> High to Low </label>
-      </div>
-    </fieldset>
-    <hr className="filter__divider"></hr>
-    <fieldset className="fieldset--style spacing--vh">
-      <legend> Availability </legend>
-      <div>
-        <input onChange={filterOutOfStock} type="checkbox" />
-        <label> Include Out of Stock </label>
-      </div>
-      <div>
-        <input onChange={filterFastDelivery} type="checkbox" />
-        <label> Fast Delivery </label>
-      </div>
-    </fieldset>
-    <hr className="filter__divider"></hr>
-    <fieldset className="fieldset--style spacing-vh">
-      <legend> Price Range</legend>
-      <div className="price-range--align">
-        <input
-          type="range"
-          min="100"
-          max="1200"
-          step="100"
-          defaultValue={priceRange}
-          onChange={handleSliderChange}
-        />
-        <label>Rs.{priceRange}</label>
-      </div>
-    </fieldset>
-    <hr className="filter__divider"></hr>
-  </div>
-);
 
 const SecondaryButton = ({ children, onClick, className }) => (
   <button

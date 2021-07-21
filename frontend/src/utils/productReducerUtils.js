@@ -1,7 +1,5 @@
 export const checkItemExist = (list, productId) => {
-  return list.find(
-    ({ id, status }) => id === productId && status !== "deleted"
-  );
+  return list.find(({ id }) => id === productId);
 };
 
 export const appendItem = (list, product) => {
@@ -16,4 +14,10 @@ export const updateQuantity = (list, updatedProduct) => {
   return list.map((product) => {
     return product.id === updatedProduct.id ? updatedProduct : product;
   });
+};
+
+export const addOrRemoveBrand = (list, brand) => {
+  return list.includes(brand)
+    ? list.filter((value) => value != brand)
+    : list.concat(brand);
 };

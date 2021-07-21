@@ -12,10 +12,13 @@ export {
   setupAuthExceptionHandler,
   getTotalPrice,
   convertToRupee,
+  getProductBrands,
+  checkBrandExists,
 } from "./productUtils";
 export {
   appendItem,
   checkItemExist,
   removeItem,
   updateQuantity,
+  addOrRemoveBrand,
 } from "./productReducerUtils";

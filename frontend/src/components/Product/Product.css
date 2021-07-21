@@ -78,12 +78,13 @@
   background-color: var(--light-color);
   position: fixed;
   z-index: 4;
-  top: 2rem;
+  top: 4rem;
   padding: 1rem 0.5rem;
   height: 100%;
   width: 100%;
-  bottom: 0;
+  padding-bottom: 4rem;
   overflow: hidden;
+  overflow-y: auto;
 }
 
 .button--outline {
@@ -114,6 +115,17 @@
 .price-range--align {
   display: flex;
   flex-direction: column;
+}
+
+.product__search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.product__brand {
+  padding: 0.4rem 0rem;
 }
 
 @media screen and (min-width: 648px) {
@@ -151,17 +163,19 @@
   }
 
   .filter__section {
-    overflow-y: auto;
     position: sticky;
+    top: 1rem;
+    overflow-y: auto;
     height: calc(100vh - 4rem);
+    padding-right: 0.5rem;
   }
 
   .filter__section::-webkit-scrollbar {
-    width: 0.25rem;
+    width: 0.1rem;
   }
 
   .filter__section::-webkit-scrollbar-thumb {
-    background-color: rgb(185, 184, 185);
+    background-color: var(--accent-color);
   }
 
   input[type="radio"] {
