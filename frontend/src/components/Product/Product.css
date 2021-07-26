@@ -77,12 +77,12 @@
 .product__filter--mobile {
   background-color: var(--light-color);
   position: fixed;
-  z-index: 4;
-  top: 4rem;
+  z-index: var(--z-index-3);
+  top: 2rem;
   padding: 1rem 0.5rem;
   height: 100%;
   width: 100%;
-  padding-bottom: 4rem;
+  padding-bottom: 2rem;
   overflow: hidden;
   overflow-y: auto;
 }

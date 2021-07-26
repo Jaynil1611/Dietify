@@ -11,7 +11,7 @@ import {
 } from "./Filter";
 import { PrimaryButton } from "./ProductListing";
 import "./Product.css";
-import { convertToRupee, useDocumentTitle } from "../../utils";
+import { useDocumentRoot, useDocumentTitle } from "../../utils";
 import FilterSection, { FilterOptions } from "./FilterSection";
 
 function Product({ loading }) {
@@ -29,7 +29,9 @@ function Product({ loading }) {
     dispatch,
   } = useProduct();
   useDocumentTitle("Products");
+
   const [showFilter, setShowFilter] = useState(false);
+  useDocumentRoot(showFilter);
 
   const sortPriceLowToHigh = () => {
     dispatch({ type: actions.PRICE_LOW_TO_HIGH });

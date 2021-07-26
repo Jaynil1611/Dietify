@@ -9,5 +9,6 @@ export default function useCleaner() {
 
   useEffect(() => {
     if (pathname !== "/login" || pathname !== "signup") closeToast(dispatch);
+    window.scrollTo(0, 0);
   }, [dispatch, pathname]);
 }

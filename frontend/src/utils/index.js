@@ -22,3 +22,4 @@ export {
   updateQuantity,
   addOrRemoveBrand,
 } from "./productReducerUtils";
+export { default as useDocumentRoot } from "./useDocumentRoot";
