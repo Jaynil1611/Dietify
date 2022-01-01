@@ -1,0 +1,123 @@
+.login__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-top: 9rem;
+  border-color: var(--light-color);
+}
+
+.login__box {
+  padding: 1rem;
+  padding-bottom: 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+  width: 90%;
+}
+
+.login__input-container {
+  width: 100%;
+  position: relative;
+}
+
+.input__container {
+  display: block;
+  text-align: start;
+  margin-bottom: 1rem;
+  margin-inline-end: 0.5rem;
+  transition: all 0.2s;
+  opacity: 1;
+}
+
+.login__input {
+  width: 100%;
+  min-width: 0px;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  position: relative;
+  appearance: none;
+  transition: all 0.2s;
+  padding: 0rem 1rem;
+  height: 40px;
+  border-radius: 0.5rem;
+  border: 1px solid;
+  border-color: var(--light-color);
+  background: inherit;
+}
+
+.login__input:hover {
+  border-color: var();
+}
+
+.login__input:focus {
+  z-index: 1;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 1px var(--accent-color);
+}
+
+.required {
+  margin-inline-start: 4px;
+}
+
+.label--helper {
+  margin-top: 1rem;
+  line-height: normal;
+}
+
+.button--submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 250ms;
+  user-select: none;
+  outline: 2px solid transparent;
+  border: 1px solid var(--accent-color);
+  outline-offset: 2px;
+  width: 100%;
+  border-radius: 1rem;
+  font-weight: 500;
+  background: var(--accent-color);
+  color: var(--text-white);
+  cursor: pointer;
+  padding: 0.5rem;
+  margin-top: 2rem;
+}
+
+.button--submit:hover {
+  background-color: var(--hover-color-primary);
+}
+
+.button--submit:focus {
+  box-shadow: 0 2px 5px rgb(0 0 0 / 20%);
+}
+
+.join-now {
+  transition: all 0.15s ease-out;
+  cursor: pointer;
+  text-decoration: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  color: var(--accent-color);
+  padding: 0.5rem;
+}
+
+.join-now:hover {
+  text-decoration: underline;
+  background: var(--light-primary-color);
+  border-radius: 1rem;
+  padding: 0.5rem;
+}
+
+.button--width {
+  max-width: max-content;
+}
+
+@media screen and (min-width: 648px) {
+  .login__box {
+    width: 40%;
+    padding: 1.5rem;
+    padding-bottom: 0;
+  }
+}

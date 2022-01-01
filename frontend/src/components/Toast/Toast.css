@@ -1,0 +1,21 @@
+.toast--position {
+  display: flex;
+  z-index: 3;
+  top: 6rem;
+  right: 0.1rem;
+  padding: 0.5rem;
+  bottom: auto;
+  background: var(--secondary-color);
+}
+
+.close--align {
+  position: absolute;
+  right: 0.2rem;
+}
+
+@media screen and (min-width: 648px) {
+  .toast--position {
+    right: 1rem;
+    padding: 1rem;
+  }
+}
