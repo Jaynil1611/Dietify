@@ -9,7 +9,7 @@
   "dependencies": {
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.1",
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "faker": "5.5.0",
     "history": "^5.0.0",
     "miragejs": "0.1.41",
