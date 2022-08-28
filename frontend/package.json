@@ -4,6 +4,7 @@
   "description": "",
   "keywords": [],
   "main": "src/index.js",
+  "homepage": ".",
   "dependencies": {
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.1",
