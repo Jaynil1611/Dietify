@@ -12,6 +12,7 @@ View the live demo of the application here 👉 [Dietify](https://dietify.vercel
 View the deployed the backend application here 👉 [Dietify Backend](https://dietify-backend.vercel.app/)
 
 ## Application View
+![Screenshot (19)](https://user-images.githubusercontent.com/48921037/187073516-12f0000f-1325-4ee8-903b-575f93c0607c.png)
 
 
 ## Technologies Used
