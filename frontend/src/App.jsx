@@ -1,4 +1,3 @@
-import "./styles.css";
 import { Route, Routes } from "react-router-dom";
 import {
   Cart,
@@ -23,6 +22,7 @@ import {
 import { useEffect, useState } from "react";
 import { actions } from "./reducers";
 import { useProduct } from "./contexts";
+import "./styles.css";
 
 export default function App() {
   const token = JSON.parse(localStorage.getItem("isUserLoggedIn"));
@@ -66,13 +66,21 @@ export default function App() {
             path="/products"
             element={<Product loading={productResponse.loadingStatus} />}
           />
-          <PrivateRoute
+          <Route
             path="/wish"
-            element={<WishList loading={wishlistResponse.loadingStatus} />}
+            element={
+              <PrivateRoute>
+                <WishList loading={wishlistResponse.loadingStatus} />
+              </PrivateRoute>
+            }
           />
-          <PrivateRoute
+          <Route
             path="/cart"
-            element={<Cart loading={cartResponse.loadingStatus} />}
+            element={
+              <PrivateRoute>
+                <Cart loading={cartResponse.loadingStatus} />
+              </PrivateRoute>
+            }
           />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

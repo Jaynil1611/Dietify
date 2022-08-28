@@ -1,10 +1,11 @@
 {
-  "name": "dietify",
+  "name": "dietify-frontend",
   "version": "1.0.0",
-  "description": "",
+  "description": "frontend code of dietify",
   "keywords": [],
   "main": "src/index.js",
-  "homepage": ".",
+  "author": "Jaynil Gaglani",
+  "license": "ISC",
   "dependencies": {
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.1",
@@ -16,7 +17,7 @@
     "react-dom": "17.0.2",
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "4.0.0"
+    "react-scripts": "^5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -14,7 +14,6 @@ function DesktopMenu({ token, handleSideMenuClick }) {
                 onClick={handleSideMenuClick}
                 to={`${path}`}
                 className="active"
-                activeClassName="active"
               >
                 <span className="subtitle--sm">{name}</span>
               </NavLink>

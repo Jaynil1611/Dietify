@@ -1,17 +1,9 @@
-import { Navigate, Route } from "react-router";
+import { Navigate } from "react-router";
 import { useProduct } from "../../contexts";
 
-function PrivateRoute({ path, element }) {
+function PrivateRoute({ children }) {
   const { token } = useProduct();
-  return (
-    <>
-      {token ? (
-        <Route element={element} path={path} />
-      ) : (
-        <Navigate replace to="/login" />
-      )}
-    </>
-  );
+  return <>{token ? children : <Navigate replace to="/login" />}</>;
 }
 
 export default PrivateRoute;

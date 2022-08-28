@@ -16,7 +16,6 @@ function MobileMenu({ showMenu, token, handleSideMenuClick }) {
                     onClick={handleSideMenuClick}
                     to={`${path}`}
                     className="active"
-                    activeClassName="active"
                   >
                     <span className="padding--right-md">
                       <i className={`fas ${icon} icon--md`}></i>
