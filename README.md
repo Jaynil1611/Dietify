@@ -31,7 +31,7 @@ View the deployed the backend application here 👉 [Dietify Backend](https://di
 - Clone the repository
 - Run npm install to install required dependencies
 - Finally, run npm start to run the application and open the browser to view the site on localhost.
-- Use Node JS version 16.17.0 to run the application on local
+- Use Node JS version `16.17.0` to run the application on local
 
 ## 👤 **Jaynil Gaglani**
 - Portfolio: [jaynil.gaglani](https://bit.ly/jaynil-profile)
