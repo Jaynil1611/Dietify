@@ -1,0 +1,65 @@
+.menu__container {
+  visibility: visible;
+  min-width: max-content;
+  margin: 0px;
+  --popper-transform-origin: top right;
+  position: absolute;
+  right: 0.5rem;
+  z-index: var(--z-index-1);
+}
+
+.menu__item {
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  background: #f7f7f7;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+  color: inherit;
+  min-width: 8rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  z-index: 1;
+  border-radius: 0.2rem;
+  border-width: 1px;
+  border-color: #e2e8f0;
+}
+
+.menu--hide {
+  transform-origin: 224px 0px;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.8) translateZ(0px);
+}
+
+.menu--show {
+  transform-origin: 224px 0px;
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.menu__button {
+  text-decoration: none;
+  color: inherit;
+  user-select: none;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  text-align: start;
+  flex: 0 0 auto;
+  outline: transparent solid 2px;
+  outline-offset: 2px;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  padding-inline: 0.8rem;
+  cursor: pointer;
+  background: transparent;
+  line-height: inherit;
+  overflow: visible;
+  border-width: 0;
+  font-size: 1rem;
+  transition: background 50ms ease-in 0s;
+}
+
+.menu__button:hover {
+  background: var(--light-color);
+}
